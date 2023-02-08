@@ -2,7 +2,7 @@ const { getRandomVillager } = require("../helpers/villagerHelper");
 
 const getIndex =  async (req, res) => {
   villager = (await getRandomVillager()).data;
-  res.render('app', {villager});
+  return res.render('app', {villager, msg: "[Click generate to start]"});
 }
 
 const getNotFound = (req, res) => {

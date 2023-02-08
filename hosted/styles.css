@@ -3,6 +3,6 @@
     src: url("./FinkHeavy.ttf");
   }
 
-body{
-    font: 18pt FinkHeavy,sans-serif;
+.ac-text {
+  font: 12pt FinkHeavy;
 }
