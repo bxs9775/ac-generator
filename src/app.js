@@ -11,8 +11,8 @@ const app = express();
 
 // static assets folder
 app.use('/assets', express.static(path.resolve(`${__dirname}/../hosted/`)));
-app.use('/jquery', express.static(__dirname + '/node_modules/jquery/dist/'));
-app.use('/axios', express.static(__dirname + '/node_modules/axios/dist/'));
+app.use('/jquery', express.static(path.resolve(`${__dirname}/../node_modules/jquery/dist/`)));
+app.use('/axios', express.static(path.resolve(`${__dirname}/../node_modules/axios/dist/`)));
 
 // disabling x-powered-by header
 app.disable('x-powered-by');
