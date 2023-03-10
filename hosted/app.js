@@ -1,7 +1,11 @@
-const generateDialogue = async (e,villagerId) => {
+const renderResponse = (response) => {
+    $(".ac-text").text(result.msg);
+}
+
+const generateDialogue = (e,villagerId) => {
     console.log("generating dialogue")
     e.preventDefault();
-    var result = await axios.get("/dialogue",{params: {villagerId}} );
-    $(".ac-text").text(result.msg);
+    axios.get("/dialogue",{params: {villagerId}} )
+        .then(renderResponse);
     return false;
 }

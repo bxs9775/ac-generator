@@ -4,7 +4,7 @@
     <img alt="{{villager.name.name-USen}}'s icon" src="{{villager.icon_uri}}" />
     {{villager.name.name-USen}}
 </div>
-<form id="ac-gen-form" submit="async (e) => await generateDialogue(e,{{{villager.id}}})">
+<form id="ac-gen-form" submit="(e) => generateDialogue(e,{{{villager.id}}})">
     <div id="ac-text"></div>
     <button type="submit">Generate text</button>
 </form>
