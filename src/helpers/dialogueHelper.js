@@ -1,5 +1,5 @@
-const generateDialogue = (villagerId) => {
-    return `Dialogue for villager ${villagerId}`
+const generateDialogue = (villager) => {
+    return `Dialogue for villager ${villager.name["name-USen"]}`
 }
 
 module.exports = { generateDialogue }

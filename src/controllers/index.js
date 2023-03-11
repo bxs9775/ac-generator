@@ -1,1 +1,1 @@
-module.exports.Site = require("./Site")
+module.exports.Generator = require("./Generator");

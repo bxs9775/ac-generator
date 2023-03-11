@@ -12,7 +12,13 @@ const getRandomId = () => {
 }
 
 const getVillager = async (index) => {
-    return await axios.get(`${url}\\${index}`);
+    try{
+        acRes = await axios.get(`${url}\\${index}`);
+        return acRes.data;
+    }
+    catch(error){
+        return null;
+    }
 }
 
 module.exports = { getVillager, getRandomId }
