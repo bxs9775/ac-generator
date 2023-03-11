@@ -22,7 +22,8 @@ app.set('views', `${__dirname}/../views`);
 
 // routing
 app.get('/', controllers.Site.getIndex);
-app.get('/dialogue', controllers.Dialogue.getDialogue);
+app.get('/villager/',controllers.Site.getRandomVillager);
+app.get('/villager/:villagerID',controllers.Site.getVillagerPage);
 app.get('/*', controllers.Site.getNotFound);
 
 // start app listening

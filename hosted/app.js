@@ -1,11 +1,4 @@
-const renderResponse = (response) => {
-    $(".ac-text").text(result.msg);
-}
-
-const generateDialogue = (e,villagerId) => {
-    console.log("generating dialogue")
-    e.preventDefault();
-    axios.get("/dialogue",{params: {villagerId}} )
-        .then(renderResponse);
-    return false;
+const goToVillager = (e) => {
+    id = $("#villager-id").val();
+    $("#choose-villager.form").attr("action",`/villager/${id}`);
 }
