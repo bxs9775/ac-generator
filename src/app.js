@@ -1,7 +1,6 @@
 // imports
 const path = require('path');
 const express = require('express');
-const { engine } = require('express-handlebars');
 const controllers = require('./controllers');
 
 // sets the port for the server to use
