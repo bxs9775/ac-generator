@@ -16,6 +16,8 @@ app.disable('x-powered-by');
 
 // routing
 app.get('/', controllers.Generator.getDialogue);
+app.get('/rules', controllers.Grammer.getRulesTest);
+app.get('/grammer', controllers.Grammer.getGrammers);
 
 // start app listening
 app.listen(port, (err) => {
