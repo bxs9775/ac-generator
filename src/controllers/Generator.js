@@ -20,7 +20,7 @@ const getDialogue = async (req,res) => {
       "catch-phrase": villager["catch-phrase"],
       "icon_uri": villager.icon_uri
     },
-    dialogue
+    "dialogue": dialogue
   })
 }
 
