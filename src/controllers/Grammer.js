@@ -19,7 +19,8 @@ const getRulesTest = async (req,res) => {
 
 const getGrammers = async (req,res) => {
     grammers = req.query.grammer;
-    return getGrammer(grammers);
+    grammerObj = getGrammer(...grammers);
+    return res.status(200).json(grammerObj);
 };
 
 

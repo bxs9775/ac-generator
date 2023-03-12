@@ -35,12 +35,15 @@ getGrammer = (...grammer) => {
         case "string":
             rules = getRules(grammer);
             break;
-        case "array":
-            rules = combineRules(...grammer);
+        case "object":
+            if(Array.isArray(grammer)){
+                rules = combineRules(...grammer);
+                break;
+            }
         default:
             return false;
     }
-    return tracery.Grammar(rules);
+    return tracery.createGrammar(rules);
 }
 
 
