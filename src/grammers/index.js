@@ -2,7 +2,14 @@ var tracery = require('tracery-grammar');
 
 grammerMap = {
     Base: require("./Base"),
-    Cranky: require("./personality/Cranky")
+    Lazy: require("./personality/Lazy"),
+    Jock: require("./personality/Jock"),
+    Cranky: require("./personality/Cranky"),
+    Smug: require("./personality/Smug"),
+    Normal: require("./personality/Normal"),
+    Peppy: require("./personality/Peppy"),
+    Snooty: require("./personality/Snooty"),
+    Uchi: require("./personality/Uchi")
 }
 
 getRules = (name) => {
@@ -17,8 +24,6 @@ getRules = (name) => {
 combineRules = (...grammerSets) => {
     grammers = grammerSets.map(grammer => getRules(grammer))
     return grammers.reduce((result,grammer) => {
-        console.log(grammer);
-        console.log(result);
         if(!grammer)
             return result;
         rules = Object.entries(grammer);
@@ -30,7 +35,7 @@ combineRules = (...grammerSets) => {
             }
         });
         return result;
-    });
+    },{});
 }
 
 getGrammer = (...grammer) => {
