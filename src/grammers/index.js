@@ -7,16 +7,20 @@ grammerMap = {
 
 getRules = (name) => {
     try{
-        return grammerMap[name]
+        return grammerMap[name];
     }
     catch(error){
-        return null
+        return null;
     }
 }
 
 combineRules = (...grammerSets) => {
-    grammers = grammerSets.map(grammer => grammerMap[grammer])
-    return grammers.reduce((grammer,result) => {
+    grammers = grammerSets.map(grammer => getRules(grammer))
+    return grammers.reduce((result,grammer) => {
+        console.log(grammer);
+        console.log(result);
+        if(!grammer)
+            return result;
         rules = Object.entries(grammer);
         rules.forEach((rule) => {
             if(rule[0] in result){
