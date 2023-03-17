@@ -1,4 +1,5 @@
 const axios = require("axios")
+const Villager = require("../classes/Villager");
 
 const url = "https://acnhapi.com/v1/villagers/"
 
@@ -14,7 +15,7 @@ const getRandomId = () => {
 const getVillager = async (index) => {
     try{
         acRes = await axios.get(`${url}\\${index}`);
-        return acRes.data;
+        return new Villager(acRes.data);
     }
     catch(error){
         return null;

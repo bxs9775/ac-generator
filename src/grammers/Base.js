@@ -4,7 +4,7 @@ module.exports = {
     mark: [".","!"],
     activity: ["talk","spend time"],
     wantto: [],
+    topic: [],
     greeting: ["#hello.capitalize#, #player##mark#"],
-    howare: ["How are you?","#wantto.capitalize# #activity# with me?"],
-    topic: ["#greeting#","#greeting# #howare#"]
+    howare: ["How are you, #catch-phrase#?","#wantto.capitalize# #activity# with me?"]
 };

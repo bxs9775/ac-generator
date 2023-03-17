@@ -15,9 +15,8 @@ app.use('/assets', express.static(path.resolve(`${__dirname}/../hosted/`)));
 app.disable('x-powered-by');
 
 // routing
-app.get('/', controllers.Generator.getDialogue);
-app.get('/rules', controllers.Grammer.getRulesTest);
-app.get('/grammer', controllers.Grammer.getGrammers);
+app.get('/dialogue', controllers.Dialogue.getDialogue);
+app.get("/rules",controllers.Dialogue.getRules);
 
 // start app listening
 app.listen(port, (err) => {

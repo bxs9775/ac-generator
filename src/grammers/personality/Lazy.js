@@ -4,7 +4,7 @@ module.exports = {
     player: ["#friend#","snack #friend#","#food# #friend#"],
     wantto: ["wanna"],
     activity: ["play","have a snack","nap","run around","eat #food#"],
-    howare: ["Wanna play?"],
+    howare: ["Wanna play?","Wanna play, #catch-phrase#?"],
     hello: ["hi"],
-    greeting: ["#greeting.capitalizeAll#","#Player.capitalize#!","I love #food#."]
+    greeting: ["#greeting.capitalizeAll#","#player.capitalize#!","I love #food#."]
 }
