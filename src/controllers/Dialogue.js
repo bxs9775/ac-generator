@@ -2,6 +2,7 @@ const { getRandomId ,getVillager } = require("../helpers/villagerHelper");
 
 const getDialogue = async (req,res) => {
   id = (req.query.villagerId)?req.query.villagerId:getRandomId();
+  playerName = (req.query.playerName)?req.query.playerName:"Player";
   villager = await getVillager(id);
   if(!villager){
     return res.status(404).json({ 
@@ -9,7 +10,8 @@ const getDialogue = async (req,res) => {
       id
     })
   }
-  dialogue = villager.generate();
+  options = { "player-name": playerName };
+  dialogue = villager.generate(options);
   return res.status(200).json({
     "villager": villager.toJson(),
     "dialogue": dialogue

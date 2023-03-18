@@ -1,5 +1,5 @@
 module.exports = {
-    player: ["Player"],
+    player: ["#player-name#"],
     hello: ["hello"],
     mark: [".","!"],
     activity: ["talk","spend time"],

@@ -23,8 +23,8 @@ class Villager{
         };
     }
     
-    generate(){
-        return this.generator.generate();
+    generate(options = null){
+        return this.generator.generate(options);
     }
 }
 
