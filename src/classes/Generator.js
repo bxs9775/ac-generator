@@ -47,7 +47,7 @@ class Generator{
         var grammar = tracery.createGrammar(currentGrammer);
         grammar.addModifiers(tracery.baseEngModifiers); 
 
-        var baseStr = `${coinflip?"#greeting# "+(coinflip?"#howare#":""):""}#topic#`;
+        var baseStr = `${coinflip?"#greeting# "+(coinflip?"#howare# ":""):""}#topic#`;
         return grammar.flatten(baseStr);
     }
 }

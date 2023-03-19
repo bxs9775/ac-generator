@@ -1,4 +1,6 @@
 module.exports = {
+    bugs: ["butterflies"],
+    "bug-verb": ["chasing"],
     good: ["good","lovely","wonderful"],
     time: ["day","morning","afternoon","evening","night"],
     wantto: ["do you want to"],
