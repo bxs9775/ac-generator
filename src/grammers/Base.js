@@ -1,25 +1,7 @@
 module.exports = {
     player: ["#player-name#"],
     hello: ["hello"],
-    mark: [".","!"],
-    activity: ["talk","spend time"],
-    wantto: [],
-    noticed: ["saw","heard","spied"],
-    "bug-verb": ["hunting for","looking for","catching"],
-    bugs: ["bugs","insects"],
-    "bug-activity": ["#bug-verb# #bugs#"],
-    "bug-hunt": ["What are you doing with that #net#? Are you #bug-activity#?"],
-    "fish-verb": ["caught","reeled in"],
-    fish: ["I #noticed# you #fish-verb# a lot of fish yesterday."],
-    hit: ["hitting","banging"],
-    buried: ["fossel","gyroid","pitfall","treasure"],
-    "dig-verb": ["digging up","searching for","hunting for"],
-    "dig-activity": ["#dig-verb# #buried.s#", "#hit.ng.capitalize# rocks, again"],
-    "tool-type": ["flimsy","golden","colorful","outdoorsy"],
-    shovel: ["shovel","#tool-type# shovel","printed-design shovel"],
-    net: ["net","#tool-type# net", "star net"],
-    dig: ["What are you doing with that #shovel#? Are you #dig-activity#?","I #noticed# you #hit# rocks yesterday."],
-    topic: ["#dig#","#fish#","#bug-hunt#"],
-    greeting: ["#hello.capitalize#, #player##mark#"],
-    howare: ["How are you, #catch-phrase#?","#wantto.capitalize# #activity# with me?"]
+    topic: [""],
+    greeting: ["#hello.capitalize#, #player#."],
+    howare: ["How are you, #catch-phrase#?"]
 };
