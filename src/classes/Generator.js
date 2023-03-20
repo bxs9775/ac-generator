@@ -1,4 +1,5 @@
 var tracery = require('tracery-grammar');
+var customModiferes = require("../helpers/customModifiers");
 var {getRules} = require("../grammers");
 
 coinflip = () => Math.floor(Math.random()*2) == 0;
@@ -46,6 +47,7 @@ class Generator{
         var currentGrammer = {...this.rawGrammer, ...options};
         var grammar = tracery.createGrammar(currentGrammer);
         grammar.addModifiers(tracery.baseEngModifiers); 
+        grammar.addModifiers(customModiferes);
 
         var baseStr = `${coinflip?"#greeting# "+(coinflip?"#howare# ":""):""}#topic#`;
         return grammar.flatten(baseStr);
