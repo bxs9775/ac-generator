@@ -3,5 +3,6 @@ module.exports = {
     hello: ["hello"],
     topic: [],
     greeting: ["#hello.capitalize#, #player#."],
-    howare: ["How are you, #catch-phrase#?"]
+    howare: ["How are you, #catch-phrase#?"],
+    origin: ["#topic#","#greeting# #topic#","#greeting# #howare# #topic#"]
 };
