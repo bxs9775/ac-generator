@@ -5,5 +5,6 @@ module.exports = {
     always: ["always","usual","ever"],
     isee: [".",", I see.",", I take it."],
     howare: ["#energetic.capitalize# as #always##isee#"],
-    hello: ["hey"]    
+    hello: ["hey"],
+    digTopic: ["[#describeDig#]What is with all the #digNoun# #digVerb.ing#, #player#?"]    
 }
