@@ -1,4 +1,5 @@
 const { getRandomId ,getVillager } = require("../helpers/villagerHelper");
+const TraceryBuilder = require("../classes/TraceryBuilder/TraceryBuilder");
 
 const getDialogue = async (req,res) => {
   id = (req.query.villagerId)?req.query.villagerId:getRandomId();
@@ -30,7 +31,23 @@ const getRules = async (req,res) => {
   return res.status(200).json(villager.generator.rawGrammer);
 }
 
+const postGrammer = async (req,res) => {
+  if(!req.body.type ){
+    return res.status(400).json({ 
+      "msg": "Request body is missing a 'type' property"
+    });
+  }
+  if(!req.body.data ){
+    return res.status(400).json({ 
+      "msg": "Request body is missing a 'data' property"
+    });
+  }
+  builder = new TraceryBuilder(req.body.data,req.body.type);
+  return res.status(200).json(builder.build());
+};
+
 module.exports = {
   getDialogue,
-  getRules
+  getRules,
+  postGrammer
 };
