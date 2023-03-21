@@ -3,5 +3,5 @@ module.exports = {
     player: ["#friend#","snack #friend#"],
     howare: ["Wanna play?","Wanna play, #catch-phrase#?"],
     hello: ["hi"],
-    greeting: ["#greeting.capitalizeAll#","#player.capitalize#!"]
+    greeting: ["#greeting.toUpperCase#","#player.toUpperCase#!"]
 }

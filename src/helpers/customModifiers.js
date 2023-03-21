@@ -14,7 +14,13 @@ var customModifiers = {
             return s+lastChar+"ing";
         }
         return s + "ing";
-    }
+    },
+    toUpperCase: function(s){
+        return s.toUpperCase();
+    },
+    toLowerCase: function(s){
+        return s.toLowerCase();
+    },
 }
 
 module.exports = customModifiers;
