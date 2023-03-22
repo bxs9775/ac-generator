@@ -1,5 +1,5 @@
 grammerMap = {
-    Base: require("./Base"),
+    Base: require("./BaseVillagerGrammer"),
     Lazy: require("./personality/Lazy"),
     Jock: require("./personality/Jock"),
     Cranky: require("./personality/Cranky"),
@@ -20,5 +20,6 @@ getRules = (name) => {
 }
 
 module.exports = {
-    getRules
+    getRules,
+    Base
 }

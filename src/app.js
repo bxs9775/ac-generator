@@ -21,7 +21,6 @@ app.disable('x-powered-by');
 // routing
 app.get('/dialogue', controllers.Dialogue.getDialogue);
 app.get("/rules",controllers.Dialogue.getRules);
-app.post("/grammer",controllers.Dialogue.postGrammer);
 
 // start app listening
 app.listen(port, (err) => {

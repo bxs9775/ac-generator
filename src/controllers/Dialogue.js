@@ -11,7 +11,7 @@ const getDialogue = async (req,res) => {
       id
     })
   }
-  options = { "player-name": playerName };
+  options = { playerName: [playerName] };
   dialogue = villager.generate(options);
   return res.status(200).json({
     "villager": villager.toJson(),
@@ -28,26 +28,13 @@ const getRules = async (req,res) => {
       id
     })
   }
-  return res.status(200).json(villager.generator.rawGrammer);
+  return res.status(200).json({
+    raw: villager.generator.builder.data,
+    grammer: villager.generator.builder.build()
+  });
 }
-
-const postGrammer = async (req,res) => {
-  if(!req.body.type ){
-    return res.status(400).json({ 
-      "msg": "Request body is missing a 'type' property"
-    });
-  }
-  if(!req.body.data ){
-    return res.status(400).json({ 
-      "msg": "Request body is missing a 'data' property"
-    });
-  }
-  builder = new TraceryBuilder(req.body.data,req.body.type);
-  return res.status(200).json(builder.build());
-};
 
 module.exports = {
   getDialogue,
-  getRules,
-  postGrammer
+  getRules
 };
