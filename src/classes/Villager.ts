@@ -1,7 +1,17 @@
-Generator = require("./Generator");
+import TraceryBuilder from "./Builders/TraceryBuilder";
+import Generator from "./Generator";
 
-class Villager{
-    constructor(villager){
+export default class Villager{
+    name:string;
+    personality:string;
+    species:string;
+    gender:string;
+    catchphrase:string;
+    iconUri:string;
+
+    generator:Generator;
+
+    constructor(villager:any){
         this.name = villager.name["name-USen"];
         this.personality = villager.personality,
         this.species = villager.species,
@@ -9,10 +19,10 @@ class Villager{
         this.catchphrase = villager["catch-phrase"],
         this.iconUri = villager.icon_uri
 
-        this.generator = new Generator(this,"Base",this.personality)
+        this.generator = new Generator(this);
     }
 
-    toJson(){
+    toJson():any{
         return {
             "name": this.name,
             "personality": this.personality,
@@ -23,7 +33,7 @@ class Villager{
         };
     }
     
-    generate(options = null){
+    generate(options:TraceryBuilder):string{
         return this.generator.generate(options);
     }
 }

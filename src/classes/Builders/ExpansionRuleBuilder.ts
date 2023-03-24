@@ -1,11 +1,12 @@
-const TraceryBuilder = require("./TraceryBuilder");
+import TraceryBuilder from "./TraceryBuilder";
+import RuleDictionary from "./RuleDictionary";
 
-class ExpansionRuleBuilder extends TraceryBuilder{
-    constructor(startingObj){
+export default class ExpansionRuleBuilder extends TraceryBuilder{
+    constructor(startingObj:RuleDictionary){
         super(startingObj);
     }
 
-    build(){
+    build():string{
         var rules = Object.entries(this.data);
         return rules.reduce((result,rule) => {
             var val = "";
@@ -18,4 +19,3 @@ class ExpansionRuleBuilder extends TraceryBuilder{
         },"");
     }
 }
-module.exports = ExpansionRuleBuilder;

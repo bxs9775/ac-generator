@@ -1,11 +1,12 @@
-const GrammerBuilder = require("../TraceryBuilder/GrammerBuilder");
-const ExpansionRuleBuilder = require("../TraceryBuilder/ExpansionRuleBuilder");
+import GrammerBuilder from "../Builders/GrammerBuilder";
+import ExpansionRuleBuilder from "../Builders/ExpansionRuleBuilder";
+import RuleDictionary from "../Builders/RuleDictionary";
 
-class BaseVillagerGrammer extends GrammerBuilder{
-    constructor(villager){
+export default class BaseVillagerGrammer extends GrammerBuilder{
+    constructor(villager:RuleDictionary){
         super({
-            name: villager.name,
-            "catch-phrase": villager["catch-phrase"],
+            name: [villager.name],
+            "catch-phrase": [villager["catch-phrase"]],
             player: ["#playerName#"],
             hello: ["hello"],
             digTopic:["[#describeDig#]What is that shovel for, #catch-phrase#? Are you #digVerb.ing##digFor# #digNoun.s#?#digExtra#"],
