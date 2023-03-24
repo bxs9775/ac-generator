@@ -1,18 +1,17 @@
 import GrammerBuilder from "./Builders/GrammerBuilder";
 import TraceryBuilder from "./Builders/TraceryBuilder";
+import GrammerFactory from "./GrammerFactory";
 import Villager from "./Villager";
 
 var customModiferes = require("../helpers/customModifiers");
-var BaseVillagerGrammer = require("./grammers/BaseVillagerGrammer");
 
 export default class Generator{
-    villager:any;
+    villager:Villager;
     builder:GrammerBuilder;
 
     constructor(villager:Villager){
-        this.villager = villager.toJson();
-        this.builder = new BaseVillagerGrammer(this.villager);
-        //grammers.getPersonality(villager.personality).configure(this.builder);
+        this.villager = villager;
+        this.builder = GrammerFactory.getGrammer(villager);
     }
 
     generate(options:TraceryBuilder){
