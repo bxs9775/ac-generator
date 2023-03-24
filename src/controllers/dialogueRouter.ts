@@ -1,6 +1,6 @@
 import express from "express";
 import VillagerHelper from "../helpers/villagerHelper";
-import TraceryBuilder from "../classes/Builders/TraceryBuilder";
+import GrammerBuilder from "../classes/Builders/GrammerBuilder";
 
 export const dialogueRouter = express.Router();
 
@@ -14,7 +14,7 @@ dialogueRouter.get('/dialogue',async (req,res) => {
       id
     })
   }
-  var options = new TraceryBuilder({ playerName: [playerName] });
+  var options = new GrammerBuilder({ playerName: [playerName] });
   var dialogue = villager.generate(options);
   return res.status(200).json({
     "villager": villager.toJson(),
