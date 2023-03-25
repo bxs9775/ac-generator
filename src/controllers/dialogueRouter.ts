@@ -7,6 +7,7 @@ export const dialogueRouter = express.Router();
 dialogueRouter.get('/dialogue',async (req,res) => {
   var id : number = (req.query.villagerId)?parseInt(req.query.villagerId as string):VillagerHelper.getRandomId();
   var playerName: string = (req.query.playerName)?req.query.playerName as string:"Player";
+  var town: string = (req.query.playerName)?req.query.playerName as string:"Town";
   var villager = await VillagerHelper.getVillager(id);
   if(!villager){
     return res.status(404).json({ 
@@ -14,7 +15,7 @@ dialogueRouter.get('/dialogue',async (req,res) => {
       id
     })
   }
-  var options = new GrammerBuilder({ playerName: [playerName] });
+  var options = new GrammerBuilder({ playerName: [playerName], town: [town] });
   var dialogue = villager.generate(options);
   return res.status(200).json({
     "villager": villager.toJson(),

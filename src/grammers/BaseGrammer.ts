@@ -32,7 +32,13 @@ export function createBaseGrammer():GrammerBuilder{
                 digExtra: [""]
             }),
             new ExpansionRuleBuilder({
-                digNoun: ["flower","tree"],
+                digNoun: "flower",
+                digVerb: ["plant","grow"],
+                digFor: "",
+                digExtra: [""]
+            }),
+            new ExpansionRuleBuilder({
+                digNoun: "tree",
                 digVerb: ["plant","grow"],
                 digFor: "",
                 digExtra: [""]
