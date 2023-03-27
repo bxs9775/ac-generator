@@ -1,6 +1,6 @@
 import GrammerBuilder from "./Builders/GrammerBuilder";
 import TraceryBuilder from "./Builders/TraceryBuilder";
-import GrammerFactory from "./GrammerFactory";
+import GrammerFactory from "./GrammarFactory";
 import Villager from "./Villager";
 
 var customModiferes = require("../helpers/customModifiers");

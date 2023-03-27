@@ -1,7 +1,5 @@
 import ExpansionRuleBuilder from "../classes/Builders/ExpansionRuleBuilder"
 import GrammerBuilder from "../classes/Builders/GrammerBuilder";
-import RuleDictionary from "../classes/Builders/RuleDictionary"
-import TraceryBuilder from "../classes/Builders/TraceryBuilder"
 
 export function createBaseGrammer():GrammerBuilder{
     return new GrammerBuilder({

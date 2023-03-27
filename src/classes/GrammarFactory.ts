@@ -1,7 +1,9 @@
 import GrammerBuilder from "./Builders/GrammerBuilder";
 import Villager from "./Villager";
-import { createBaseGrammer } from "../grammers/BaseGrammer";
+import { createBaseGrammer } from "../grammers/BaseGrammar";
 import ExpansionRuleBuilder from "./Builders/ExpansionRuleBuilder";
+import { createFitnessGrammar } from "../grammers/FitnessGrammar";
+import { createMusicGrammar } from "../grammers/MusicGrammar";
 
 export default class GrammerFactory{
     static getGrammer(villager:Villager):GrammerBuilder{
@@ -30,7 +32,7 @@ export default class GrammerFactory{
                 grammar.addRule("player","coach","teammate");
                 (grammar.data["describeDig"] as Array<ExpansionRuleBuilder>).forEach(elem => elem.addRule("digExtra"," That's a good idea for #digMuscle.a# workout."," You know #digNoun# #digVerb.ing# is good for developing your #digMuscle.s#?"," I should add that to my #digMuscle# regimen."))
                 grammar.addRule("digMuscle","glute", "hamstring", "quad", "ab", "shoulder");
-                grammar.addRule("topic","#sportTopic#","#exerciseTopic#");
+                grammar.addRule("topic","#sportTopic#");
                 grammar.addRule("sportTopic","[#describeSport#]It's good #sport# weather today.#sportExtra#","[#describeSport#]The weather is perfect for #sport#, #catch-phrase#. Would you join me for #sportGame.a#?","[#describeSport#]I've really been into #sport# lately. I'm practicing my #sportVerb.ing#. Care to join me, #catch-phrase#?",
                     "[#describeSport#]I've really been into #sport# lately.#sportExtra#");
                 grammar.addRule("describeSport",
@@ -53,21 +55,8 @@ export default class GrammerFactory{
                     sportExtra: [""]
                 })
                 );
-                grammar.addRule("exerciseTopic","[#describeExercise#]I'm thinking of doing some #exercise#. Its good for your #exerciseTarget.s#.","[#describeExercise#]I just finished my #exercise# regimen, #catch-phrase#. My #exerciseTarget.s# are going to be sore.");
-                grammar.addRule("describeExercise",
-                new ExpansionRuleBuilder({
-                    exercise: "cardio",
-                    exerciseTarget: ["leg","calf","muscle"]
-                }),
-                new ExpansionRuleBuilder({
-                    exercise: ["arm exercises","curls"],
-                    exerciseTarget: ["arm","bicep"]
-                }),
-                new ExpansionRuleBuilder({
-                    exercise: "pushups",
-                    exerciseTarget: ["tricep","pec","shoulder"]
-                })
-                );
+                grammar.addObject(createFitnessGrammar());
+                grammar.addRule("exerciseTopic","[#describeExercise#]I just finished my #exercise# regimen, #catch-phrase#. My #exerciseTarget.s# are going to be sore.");
                 break;
             case "Smug":
                 grammar.addRule("hello","bienvenue");
@@ -99,7 +88,7 @@ export default class GrammerFactory{
                 (grammar.data["describeDig"] as Array<ExpansionRuleBuilder>).find(elem => elem.data["digNoun"] === "fossil")?.addRule("digExtra"," That sounds fun. Maybe I should become the world's first pop-star/celebrity archeologist."," Dinosaur bones are old but I hear they are comming back into style.");
                 (grammar.data["describeDig"] as Array<ExpansionRuleBuilder>).find(elem => elem.data["digNoun"] === "gyroid")?.addRule("digExtra"," That sounds fun. Maybe I should become the world's first pop-star/celebrity archeologist."," Gyroids are great. They can be both your band and backup dancers.");
                 break;
-            case "uchi":
+            case "Uchi":
                 grammar.addRule("player","bukko","kid");
                 grammar.addRule("hello","hey","hey there","whoa there");
                 grammar.addRule("greeting","Hay there.","Whoa there!");
@@ -118,6 +107,38 @@ export default class GrammerFactory{
                 (grammar.data["describeDig"] as Array<ExpansionRuleBuilder>).find(elem => elem.data["digNoun"] === "pitfall")?.addRule("digExtra"," If I find myself in one of your holes #player#...");
                 (grammar.data["describeDig"] as Array<ExpansionRuleBuilder>).forEach(elem => elem.addRule("digExtra"," Personally I prefer hunting around for bargans at Nook's."))
                 break;
+        }
+        switch(villager.hobby){
+            case "Fitness":
+                grammar.addObject(createFitnessGrammar());
+                if(villager.personality === "Cranky"){
+                    grammar.addRule("exerciseTopic","[#describeExercise#]At my age, it is important to take care of your body. That is why I do some #exercise# every day.","[#describeExercise#]My darn #exerciseTarget.s# are sore. Must be from the #exercise# the other day, #catch-phrase#.");
+                }
+                if(villager.personality === "Normal"){
+                    grammar.addRule("exerciseTopic","[#describeExercise#]I want to keep in shape, so I'm trying to do some #exercise#.");
+                }
+                if(villager.personality === "Peppy" || villager.personality === "Smug"){
+                    grammar.addRule("exerciseTopic","[#describeExercise#]I'm doing celebrity #exercise#. Do you want to join?");
+                    grammar.addRule("describeExercise",
+                    new ExpansionRuleBuilder({
+                        exercise: "Zumba",
+                        xerciseTarget: ["leg","calf","arm"]
+                    }),
+                    new ExpansionRuleBuilder({
+                        exercise: "dance exercise",
+                        xerciseTarget: ["leg","calf","arm"]
+                    })
+                    )
+                }
+                if(villager.personality === "Lazy"){
+                    grammar.addRule("exerciseTopic","[#describeExercise#]Why are #exercise# so hard? Maybe I'll just run around instead...","[#describeExercise#]Do you do #exercise#, #player#? The person on TV says its good for #exerciseTarget.s#.");
+                }
+                break;
+            case "Music":
+                grammar.addObject(createMusicGrammar());
+                if(villager.personality === "Lazy"){
+                    grammar.addRule("musicTopic","[#describeMusic#]The best music to go with eating a snack is #musicGenre#.","[#describeMusic#]You know you can sing #musicSong# at any time? Its free.");
+                }
         }
         return grammar;
     }
