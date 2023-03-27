@@ -1,8 +1,9 @@
-import ExpansionRuleBuilder from "../classes/Builders/ExpansionRuleBuilder"
-import GrammerBuilder from "../classes/Builders/GrammerBuilder";
+import ExpansionRuleBuilder from "../../classes/Builders/ExpansionRuleBuilder"
+import GrammerBuilder from "../../classes/Builders/GrammerBuilder";
 
 export function createFitnessGrammar():GrammerBuilder{
     return new GrammerBuilder({
+        "topic": ["#exerciseTopic#"],
         "exerciseTopic": ["[#describeExercise#]I'm thinking of doing some #exercise#. Its good for your #exerciseTarget.s#."],
         "describeExercise": [
             new ExpansionRuleBuilder({
@@ -17,7 +18,6 @@ export function createFitnessGrammar():GrammerBuilder{
                 exercise: "pushups",
                 exerciseTarget: ["tricep","pec","shoulder"]
             })
-        ],
-        "topic": ["#exerciseTopic#"]
+        ]
     });
 }

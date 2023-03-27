@@ -2,8 +2,10 @@ import GrammerBuilder from "./Builders/GrammerBuilder";
 import Villager from "./Villager";
 import { createBaseGrammer } from "../grammers/BaseGrammar";
 import ExpansionRuleBuilder from "./Builders/ExpansionRuleBuilder";
-import { createFitnessGrammar } from "../grammers/FitnessGrammar";
-import { createMusicGrammar } from "../grammers/MusicGrammar";
+import { createFitnessGrammar } from "../grammers/hobby/FitnessGrammar";
+import { createMusicGrammar } from "../grammers/hobby/MusicGrammar";
+import { createDigGrammar } from "../grammers/generalActivity/digGrammer";
+import { createFishGrammar } from "../grammers/generalActivity/FishGrammer";
 
 export default class GrammerFactory{
     static getGrammer(villager:Villager):GrammerBuilder{
@@ -11,7 +13,13 @@ export default class GrammerFactory{
             name: [villager.name],
             "catch-phrase": [villager.catchphrase]
         });
-        var grammar = createBaseGrammer().addObject(villagerGrammer);
+        var grammar = createBaseGrammer()
+            .addObject(villagerGrammer)
+            .addObject(createDigGrammar())
+            .addObject(createFishGrammar());
+        if(villager.personality != "Lazy"){
+            grammar.addRule("fishVerb","reel in","land","hook");
+        }
         switch(villager.personality){
             case "Lazy":
                 grammar.addRule("friend","friend","pal","buddy");
@@ -20,13 +28,18 @@ export default class GrammerFactory{
                 grammar.addRule("hello","hi");
                 grammar.addRule("greeting","#greeting.toUpperCase#","#player.toUpperCase#!");
                 grammar.data["describeDig"].push(new ExpansionRuleBuilder({
-                    digNoun: "treasure",
-                    digVerb: ["dig","hunt"],
-                    digFor: " for",
+                    digNoun: ["[adj:,pirate ,buried ]#adj#treasure"],
+                    digVerb: ["dig for","hunt for"],
                     digExtra: ""
                 }));
                 (grammar.data["describeDig"] as Array<ExpansionRuleBuilder>).find(elem => elem.data["digNoun"] === "fossil")?.addRule("digExtra"," We're too late! We could be riding dinosaurs, #catch-phrase#."," Do you think you'll find any cool dinosaurs, #player#.");
                 (grammar.data["describeDig"] as Array<ExpansionRuleBuilder>).find(elem => elem.data["digNoun"] === "gyroid")?.addRule("digExtra","I like gyroids, they make a lot of funny sounds.");
+                grammar.addRule("fishVerb","nab");
+                grammar.addRule("fishNoun","fishy");
+                grammar.addRule("fishExtra","", " The fish are nummiest at this time of year."," If you catch too many, would you share with me?")
+                grammar.data["fishTopic"] = grammar.data["fishTopic"].map((s:string) => s + "#fishExtra#");
+                grammar.addRule("bugVerb","nab","make friends with");
+                grammar.addRule("bugNoun","bug friend");
                 break;
             case "Jock":
                 grammar.addRule("player","coach","teammate");
@@ -57,12 +70,15 @@ export default class GrammerFactory{
                 );
                 grammar.addObject(createFitnessGrammar());
                 grammar.addRule("exerciseTopic","[#describeExercise#]I just finished my #exercise# regimen, #catch-phrase#. My #exerciseTarget.s# are going to be sore.");
+                grammar.addRule("fishNoun","lurker");
                 break;
             case "Smug":
                 grammar.addRule("hello","bienvenue");
                 grammar.addRule("stageDir","stage left","stage right");
                 grammar.addRule("greeting","#player.capitalize# enters #stageDir#.");
                 (grammar.data["describeDig"] as Array<ExpansionRuleBuilder>).find(elem => elem.data["digNoun"] === "fossil")?.addRule("digExtra"," Dinosaur bones are old but I hear they are comming back into style.");
+                grammar.addRule("fishVerb","lure in");
+                grammar.addRule("fishNoun","lurker");
                 break;
             case "Cranky":
                 grammar.addRule("player","youngin","kid");
@@ -75,6 +91,7 @@ export default class GrammerFactory{
                 grammar.addRule("digTopic","[#describeDig#]What is with all the #digNoun# #digVerb.ing#, #player#?");
                 (grammar.data["describeDig"] as Array<ExpansionRuleBuilder>).find(elem => elem.data["digNoun"] === "pitfall")?.addRule("digExtra"," If I find myself in one of those darn holes #player#..."," Don't cause too much trouble #player#!");
                 (grammar.data["describeDig"] as Array<ExpansionRuleBuilder>).forEach(elem => elem.addRule("digExtra"," Fine. Just keep out of my lawn."))
+                grammar.addRule("fishNoun","lurker");
                 break;
             case "Normal":
                 grammar.addRule("good","good","lovely","wonderful","nice");
@@ -87,13 +104,14 @@ export default class GrammerFactory{
             case "Peppy":
                 (grammar.data["describeDig"] as Array<ExpansionRuleBuilder>).find(elem => elem.data["digNoun"] === "fossil")?.addRule("digExtra"," That sounds fun. Maybe I should become the world's first pop-star/celebrity archeologist."," Dinosaur bones are old but I hear they are comming back into style.");
                 (grammar.data["describeDig"] as Array<ExpansionRuleBuilder>).find(elem => elem.data["digNoun"] === "gyroid")?.addRule("digExtra"," That sounds fun. Maybe I should become the world's first pop-star/celebrity archeologist."," Gyroids are great. They can be both your band and backup dancers.");
+                grammar.addRule("fishVerb","lure in");
                 break;
             case "Uchi":
                 grammar.addRule("player","bukko","kid");
                 grammar.addRule("hello","hey","hey there","whoa there");
                 grammar.addRule("greeting","Hay there.","Whoa there!");
                 grammar.addRule("howAre","What's the rush, #catch-phrase#?","Hold on a minute there.","What are you up to, #catch-phrase#?");
-                grammar.addRule("digTopic","What could you be up to with that shovel, #player#.","#describeDig#I see that shovel, #player#. #digVerb.capitalize.ing##digFor# #digNoun.s#?");
+                grammar.addRule("digTopic","What could you be up to with that #shovel.capitalize#, #player#?","#describeDig#I see that #shovel.capitalize#, #player#. #digVerb.capitalize.ing# #digNoun.s#?");
                 (grammar.data["describeDig"] as Array<ExpansionRuleBuilder>).find(elem => elem.data["digNoun"] === "pitfall")?.addRule("digExtra"," If I find myself in one of your holes #player#..."," Sounds like there is a new troublemaker in #town#.");
                 break;
             case "snooty":
@@ -106,6 +124,7 @@ export default class GrammerFactory{
                 grammar.addRule("greeting","You again.");
                 (grammar.data["describeDig"] as Array<ExpansionRuleBuilder>).find(elem => elem.data["digNoun"] === "pitfall")?.addRule("digExtra"," If I find myself in one of your holes #player#...");
                 (grammar.data["describeDig"] as Array<ExpansionRuleBuilder>).forEach(elem => elem.addRule("digExtra"," Personally I prefer hunting around for bargans at Nook's."))
+                grammar.addRule("fishVerb","lure in");
                 break;
         }
         switch(villager.hobby){

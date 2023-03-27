@@ -1,8 +1,9 @@
-import ExpansionRuleBuilder from "../classes/Builders/ExpansionRuleBuilder"
-import GrammerBuilder from "../classes/Builders/GrammerBuilder";
+import ExpansionRuleBuilder from "../../classes/Builders/ExpansionRuleBuilder"
+import GrammerBuilder from "../../classes/Builders/GrammerBuilder";
 
 export function createMusicGrammar():GrammerBuilder{
     return new GrammerBuilder({
+        "topic": ["#musicTopic#"],
         "musicTopic": ["[#describeMusic#]I like listening to #musicGenre# music. What about you, #player#?","[#describeMusic#]I'm really into #musicGenre# lately. My favorite song has to be #musicSong#."],
         "describeMusic": [
             new ExpansionRuleBuilder({
@@ -59,7 +60,6 @@ export function createMusicGrammar():GrammerBuilder{
                 musicGenre: "ragtime",
                 musicSong: ["K.K. Ragtime"]
             })
-        ],
-        "topic": ["#musicTopic#"]
+        ]
     });
 }
