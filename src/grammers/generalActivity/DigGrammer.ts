@@ -5,16 +5,16 @@ export function createDigGrammar():GrammerBuilder{
     return new GrammerBuilder({
         topic: ["#digTopic#"],
         shovel: ["[adj:#baseToolAdj#,printed-design ]#adj#shovel"],
-        digTopic:["[#describeDig#]What is that #shovel.capitalize# for, #catch-phrase#? Are you #digVerb.ing# #digNoun.s#?#digExtra#"],
+        digTopic:["[#describeDig#]What is that #shovel# for, #catch-phrase#? Are you #digVerb.ing# #digNoun.s#?#digExtra#","[digNoun:fossel,gyroid]I hear there are a lot of #digNoun.s# around #town#. Why don't you grab a shovel and start digging?"],
         describeDig: [
             new ExpansionRuleBuilder({
                 digNoun: "fossel",
-                digVerb: ["dig for","hunt for"],
+                digVerb: ["dig up","hunt for"],
                 digExtra: [""]
             }),
             new ExpansionRuleBuilder({
                 digNoun: "gyroid",
-                digVerb: ["dig for","hunt for"],
+                digVerb: ["dig up","hunt for"],
                 digExtra: [""]
             }),
             new ExpansionRuleBuilder({

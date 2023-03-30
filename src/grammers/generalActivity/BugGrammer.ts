@@ -8,7 +8,7 @@ export function createBugGrammar():GrammerBuilder{
         bugNoun: ["bug","insect","beetle","butterfly","dragonfly"],
         bugVerb: ["catch"],
         bugTopic:[
-            "Are you #bugVerb.ing# a lot of #bugNoun.s# with that #net.capitalize#, #player#?"
+            "Are you #bugVerb.ing# a lot of #bugNoun.s# with that #net#, #player#?"
         ],
     });
 }

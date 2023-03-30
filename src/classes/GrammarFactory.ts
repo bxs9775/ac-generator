@@ -4,8 +4,10 @@ import { createBaseGrammer } from "../grammers/BaseGrammar";
 import ExpansionRuleBuilder from "./Builders/ExpansionRuleBuilder";
 import { createFitnessGrammar } from "../grammers/hobby/FitnessGrammar";
 import { createMusicGrammar } from "../grammers/hobby/MusicGrammar";
-import { createDigGrammar } from "../grammers/generalActivity/digGrammer";
+import { createDigGrammar } from "../grammers/generalActivity/DigGrammer";
 import { createFishGrammar } from "../grammers/generalActivity/FishGrammer";
+import { createPlayGrammar } from "../grammers/hobby/PlayGrammar";
+import { createNatureGrammar } from "../grammers/hobby/NatureGrammar";
 
 export default class GrammerFactory{
     static getGrammer(villager:Villager):GrammerBuilder{
@@ -27,10 +29,11 @@ export default class GrammerFactory{
                 grammar.addRule("howAre","Wanna play?","Wanna play, #catch-phrase#?");
                 grammar.addRule("hello","hi");
                 grammar.addRule("greeting","#greeting.toUpperCase#","#player.toUpperCase#!");
+                grammar.addRule("treasure","[adj:,pirate ,buried ]#adj#treasure")
                 grammar.data["describeDig"].push(new ExpansionRuleBuilder({
-                    digNoun: ["[adj:,pirate ,buried ]#adj#treasure"],
-                    digVerb: ["dig for","hunt for"],
-                    digExtra: ""
+                    digNoun: "#treasure#",
+                    digVerb: ["dig up","hunt for"],
+                    digExtra: [""]
                 }));
                 (grammar.data["describeDig"] as Array<ExpansionRuleBuilder>).find(elem => elem.data["digNoun"] === "fossil")?.addRule("digExtra"," We're too late! We could be riding dinosaurs, #catch-phrase#."," Do you think you'll find any cool dinosaurs, #player#.");
                 (grammar.data["describeDig"] as Array<ExpansionRuleBuilder>).find(elem => elem.data["digNoun"] === "gyroid")?.addRule("digExtra","I like gyroids, they make a lot of funny sounds.");
@@ -111,7 +114,7 @@ export default class GrammerFactory{
                 grammar.addRule("hello","hey","hey there","whoa there");
                 grammar.addRule("greeting","Hay there.","Whoa there!");
                 grammar.addRule("howAre","What's the rush, #catch-phrase#?","Hold on a minute there.","What are you up to, #catch-phrase#?");
-                grammar.addRule("digTopic","What could you be up to with that #shovel.capitalize#, #player#?","#describeDig#I see that #shovel.capitalize#, #player#. #digVerb.capitalize.ing# #digNoun.s#?");
+                grammar.addRule("digTopic","What could you be up to with that #shovel#, #player#?","#describeDig#I see that #shovel#, #player#. #digVerb.capitalize.ing# #digNoun.s#?");
                 (grammar.data["describeDig"] as Array<ExpansionRuleBuilder>).find(elem => elem.data["digNoun"] === "pitfall")?.addRule("digExtra"," If I find myself in one of your holes #player#..."," Sounds like there is a new troublemaker in #town#.");
                 break;
             case "snooty":
@@ -157,6 +160,49 @@ export default class GrammerFactory{
                 grammar.addObject(createMusicGrammar());
                 if(villager.personality === "Lazy"){
                     grammar.addRule("musicTopic","[#describeMusic#]The best music to go with eating a snack is #musicGenre#.","[#describeMusic#]You know you can sing #musicSong# at any time? Its free.");
+                }
+                if(villager.personality === "Peppy"){
+                    grammar.addRule("musicTopic","I'm listening to a variety of music for when I become famous. Recently, I have been listening to [#describeMusic#]#musicGenre# and [#describeMusic#]#musicGenre#.");
+                }
+                if(villager.personality === "Smug"){
+                    grammar.addRule("musicTopic","If I described myself as an artist I would say I'm mainly into [#describeMusic#]#musicGenre# and [#describeMusic#]#musicGenre#. However, I'm also known in [#describeMusic#]#musicGenre# circles.");
+                }
+                if(villager.personality === "Uchi"){
+                    grammar.addRule("musicTopic","I'm really into playing music and writing songs, #player#. I would love to be in a band, but I don't know anyone who plays.","My guitar is the center of my house. I love playing all types of music.");
+                }
+                break;
+            case "Play":
+                grammar.addObject(createPlayGrammar());
+                if(villager.personality === "Lazy"){
+                    grammar.addRule("playTopic","Sometimes I feel so full of energy, I just want to run around.","#town.capitalize# is so big, it is perfect for running around.","Wanna play #playGame#, #player#? Please?");
+                    grammar.addRule("playExtra"," It's so fun."," I'm glad that #town# has lots of space.");
+                }
+                if(villager.personality === "Jock"){
+                    grammar.addRule("playExtra", " Its good exercise."," Its a good way of building muscle.");
+                }
+                if(villager.personality === "Peppy"){
+                    grammar.addRule("playTopic","It may look like I'm just running around, but I'm preparing for my life as a celebrity.","I'm going to be a famous #playGame# player.","Guess what, #player#. I'm playing one-person #playGame# and I won! I'm so bored...");
+                }
+                if(villager.personality === "Smug"){
+                    grammar.addRule("playTopic","It may look like I'm just running around, but I'm preparing for my life as a celebrity.","I'm going to be a famous #playGame# player.");
+                }
+                if(villager.personality === "Cranky" || villager.personality === "Snooty"){
+                    grammar.addRule("playExtra"," Are you surprised, #player#? I'm guessing you think I'm to old such things.");
+                }
+                break;
+            case "Nature":
+                grammar.addObject(createNatureGrammar());
+                if(villager.personality === "Lazy"){
+                    grammar.addRule("natureTopic", "Its lots of fun to nap under a tree.","I'm planting #flower.s# for my bug friends.")
+                }
+                if(villager.personality === "Jock"){
+                    grammar.addRule("natureTopic", "[garden:garden,plant #flower.s#,plant trees]Surprised to see me #garden.ing#. [muscle:leg,arm,shoulder,neck,back,abdomen]Its a good #muscle# workout, #catch-phrase#.")
+                }
+                if(villager.personality === "Uchi"){
+                    grammar.addRule("natureTopic", "Why is everyone surprised I like flowers, #catch-phrase#?","Hey! Watch yourself around my #flower.s#!");
+                }
+                if(villager.personality === "Cranky"){
+                    grammar.addRule("natureTopic", "Stay off my lawn, #player#. You're going to trample the #flower.s.","I enjoy walking around outdoors, there is no telling what you'll see.");
                 }
         }
         return grammar;
