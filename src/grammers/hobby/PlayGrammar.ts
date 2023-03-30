@@ -4,7 +4,7 @@ import GrammerBuilder from "../../classes/Builders/GrammerBuilder";
 export function createPlayGrammar():GrammerBuilder{
     return new GrammerBuilder({
         "topic": ["#playTopic#"],
-        "playTopic": ["Oh, I'm just running around, #player#.#playExtra#","I enjoy playing a lot of games.#playExtra#"],
+        "playTopic": ["Oh, I'm just running around, #player#.#playExtra#","I enjoy playing #lotOf# games.#playExtra#"],
         "playExtra": [""," Would you like to join me?"],
         "playGame": ["treasure hunt","hide and seek","tag"]
     });

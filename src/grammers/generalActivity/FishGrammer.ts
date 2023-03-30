@@ -9,8 +9,8 @@ export function createFishGrammar():GrammerBuilder{
         fish: ["black bass","sea bass","trout","horse makeral","salmon","tuna","barred knifejaw","squid","olive flounder","dab"],
         fishNoun: ["fish"],
         fishTopic:[
-            "Are you #fishVerb.ing# a lot of #fishNoun.s# with that #fishingrod#, #player#?",
-            "Look at #playerName# with their #fishingrod#. I hope you #fishVerb# a lot of #fishNoun.s#, #catch-phrase#.",
+            "Are you #fishVerb.ing# #lotOf# #fishNoun.s# with that #fishingrod#, #player#?",
+            "Look at #playerName# with their #fishingrod#. I hope you #fishVerb# #lotOf# #fishNoun.s#, #catch-phrase#.",
         ],
     });
 }

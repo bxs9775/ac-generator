@@ -5,7 +5,7 @@ export function createDigGrammar():GrammerBuilder{
     return new GrammerBuilder({
         topic: ["#digTopic#"],
         shovel: ["[adj:#baseToolAdj#,printed-design ]#adj#shovel"],
-        digTopic:["[#describeDig#]What is that #shovel# for, #catch-phrase#? Are you #digVerb.ing# #digNoun.s#?#digExtra#","[digNoun:fossel,gyroid]I hear there are a lot of #digNoun.s# around #town#. Why don't you grab a shovel and start digging?"],
+        digTopic:["[#describeDig#]What is that #shovel# for, #catch-phrase#? Are you #digVerb.ing# #digNoun.s#?#digExtra#","[digNoun:fossel,gyroid]I hear there are #lotOf# #digNoun.s# around #town#. Why don't you grab a shovel and start digging?"],
         describeDig: [
             new ExpansionRuleBuilder({
                 digNoun: "fossel",

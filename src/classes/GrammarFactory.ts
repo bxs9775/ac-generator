@@ -21,6 +21,7 @@ export default class GrammerFactory{
             .addObject(createFishGrammar());
         if(villager.personality != "Lazy"){
             grammar.addRule("fishVerb","reel in","land","hook");
+            grammar.addRule("lotOf","a lot of")
         }
         switch(villager.personality){
             case "Lazy":
@@ -29,6 +30,7 @@ export default class GrammerFactory{
                 grammar.addRule("howAre","Wanna play?","Wanna play, #catch-phrase#?");
                 grammar.addRule("hello","hi");
                 grammar.addRule("greeting","#greeting.toUpperCase#","#player.toUpperCase#!");
+                grammar.addRule("lotOf","lotsa","lotta")
                 grammar.addRule("treasure","[adj:,pirate ,buried ]#adj#treasure")
                 grammar.data["describeDig"].push(new ExpansionRuleBuilder({
                     digNoun: "#treasure#",
@@ -36,13 +38,13 @@ export default class GrammerFactory{
                     digExtra: [""]
                 }));
                 (grammar.data["describeDig"] as Array<ExpansionRuleBuilder>).find(elem => elem.data["digNoun"] === "fossil")?.addRule("digExtra"," We're too late! We could be riding dinosaurs, #catch-phrase#."," Do you think you'll find any cool dinosaurs, #player#.");
-                (grammar.data["describeDig"] as Array<ExpansionRuleBuilder>).find(elem => elem.data["digNoun"] === "gyroid")?.addRule("digExtra","I like gyroids, they make a lot of funny sounds.");
+                (grammar.data["describeDig"] as Array<ExpansionRuleBuilder>).find(elem => elem.data["digNoun"] === "gyroid")?.addRule("digExtra"," I like gyroids."," I like gyroids, they make #lotOf# funny sounds.");
                 grammar.addRule("fishVerb","nab");
                 grammar.addRule("fishNoun","fishy");
                 grammar.addRule("fishExtra","", " The fish are nummiest at this time of year."," If you catch too many, would you share with me?")
                 grammar.data["fishTopic"] = grammar.data["fishTopic"].map((s:string) => s + "#fishExtra#");
                 grammar.addRule("bugVerb","nab","make friends with");
-                grammar.addRule("bugNoun","bug friend");
+                grammar.addRule("bugNoun","bug #friend#");
                 break;
             case "Jock":
                 grammar.addRule("player","coach","teammate");
