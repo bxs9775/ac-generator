@@ -21,6 +21,7 @@ export default class VilagerHelper{
             return new Villager(acRes.data);
         }
         catch(error){
+            console.log(error);
             return null;
         }
 }
