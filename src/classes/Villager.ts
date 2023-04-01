@@ -10,8 +10,6 @@ export default class Villager{
     catchphrase:string;
     iconUri:string;
 
-    generator:Generator;
-
     constructor(villager:any){
         this.name = villager.name["name-USen"];
         this.personality = villager.personality;
@@ -20,8 +18,6 @@ export default class Villager{
         this.hobby = villager.hobby;
         this.catchphrase = villager["catch-phrase"];
         this.iconUri = villager.icon_uri;
-
-        this.generator = new Generator(this);
     }
 
     toJson():any{
@@ -34,10 +30,6 @@ export default class Villager{
             "catch-phrase": this.catchphrase,
             "icon_uri": this.iconUri
         };
-    }
-    
-    generate(options:TraceryBuilder):string{
-        return this.generator.generate(options);
     }
 }
 

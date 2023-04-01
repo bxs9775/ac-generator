@@ -10,15 +10,19 @@ import { createPlayGrammar } from "../grammers/hobby/PlayGrammar";
 import { createNatureGrammar } from "../grammers/hobby/NatureGrammar";
 
 export default class GrammerFactory{
-    static getGrammer(villager:Villager):GrammerBuilder{
+    static async getGrammer(villager:Villager):Promise<GrammerBuilder>{
+        var today = new Date();
+        var month = today.getMonth()+1;
+
         var villagerGrammer = new GrammerBuilder({
             name: [villager.name],
-            "catch-phrase": [villager.catchphrase]
+            "catch-phrase": [villager.catchphrase],
+            month: today.toLocaleString('default', { month: 'long' })
         });
         var grammar = createBaseGrammer()
             .addObject(villagerGrammer)
             .addObject(createDigGrammar())
-            .addObject(createFishGrammar());
+            .addObject(await createFishGrammar(month));
         if(villager.personality != "Lazy"){
             grammar.addRule("fishVerb","reel in","land","hook");
             grammar.addRule("lotOf","lot of")
@@ -41,7 +45,7 @@ export default class GrammerFactory{
                 (grammar.data["describeDigTreasure"] as Array<ExpansionRuleBuilder>).find(elem => elem.data["digNoun"] === "gyroid")?.addRule("digExtra"," I like gyroids."," I like gyroids, they make #lotOf.a# funny sounds.");
                 grammar.addRule("fishVerb","nab");
                 grammar.addRule("fishNoun","fishy");
-                grammar.addRule("fishExtra","", " The fish are nummiest at this time of year."," If you catch too many, would you share with me?")
+                grammar.addRule("fishExtra","", " You can catch nummy #fish# this time of year."," If you catch too many, would you share with me?")
                 grammar.addRule("bugVerb","nab","make friends with");
                 grammar.addRule("bugNoun","bug #friend#");
                 break;
@@ -76,6 +80,7 @@ export default class GrammerFactory{
                 grammar.addObject(createFitnessGrammar());
                 grammar.addRule("exerciseTopic","[#describeExercise#]I just finished my #exercise# regimen, #catch-phrase#. My #exerciseTarget.s# are going to be sore.");
                 grammar.addRule("fishNoun","lurker");
+                grammar.addRule("fishExtra","", "[#describeFish#] Fishing pros know that its the right time for catching #fishType# and #fishType# in the #fishLoc#.")
                 break;
             case "Smug":
                 grammar.addRule("hello","bienvenue");
@@ -99,6 +104,7 @@ export default class GrammerFactory{
                 grammar.addRule("fishNoun","lurker");
                 grammar.addRule("fishTopic",
                 "Look at #playerName# with their #fishingrod#. I hope you #fishVerb# #lotOf.a# #fishNoun.s#, #catch-phrase#.#fishExtra#");
+                grammar.addRule("fishExtra","[#describeFish#]Back in my day, we used to fish for #fish# during #month#. I tell you, #player#, the #fishLoc.s# would be full of them, #catch-phrase#.")
                 break;
             case "Normal":
                 grammar.addRule("good","good","lovely","wonderful","nice");

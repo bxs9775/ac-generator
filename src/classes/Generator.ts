@@ -11,7 +11,12 @@ export default class Generator{
 
     constructor(villager:Villager){
         this.villager = villager;
-        this.builder = GrammerFactory.getGrammer(villager);
+        this.builder = new GrammerBuilder({});
+    }
+
+    async createBuilder():Promise<Generator>{
+        this.builder = await GrammerFactory.getGrammer(this.villager);
+        return this;
     }
 
     generate(options:TraceryBuilder){

@@ -1,6 +1,7 @@
 import express from "express";
-import VillagerHelper from "../helpers/villagerHelper";
+import VillagerHelper from "../helpers/acnhapiHelper";
 import GrammerBuilder from "../classes/Builders/GrammerBuilder";
+import Generator from "../classes/Generator";
 
 export const dialogueRouter = express.Router();
 
@@ -15,8 +16,11 @@ dialogueRouter.get('/dialogue',async (req,res) => {
       id
     })
   }
+  var generator = new Generator(villager);
+  var _ = await generator.createBuilder();
+
   var options = new GrammerBuilder({ playerName: [playerName], town: [town] });
-  var dialogue = villager.generate(options);
+  var dialogue = generator.generate(options);
   return res.status(200).json({
     "villager": villager.toJson(),
     "dialogue": dialogue
@@ -32,8 +36,11 @@ dialogueRouter.get('/rules', async (req,res) => {
       id
     })
   }
+  var generator = new Generator(villager);
+  var _ = await generator.createBuilder();
+
   return res.status(200).json({
-    raw: villager.generator.builder.data,
-    grammer: villager.generator.builder.build()
+    raw: generator.builder.data,
+    grammer: generator.builder.build()
   });
 });
