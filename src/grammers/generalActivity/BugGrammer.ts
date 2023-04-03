@@ -5,10 +5,15 @@ export function createBugGrammar():GrammerBuilder{
     return new GrammerBuilder({
         topic: ["#bugTopic#"],
         net: ["[adj:#baseToolAdj#,star ]#adj#net"],
-        bugNoun: ["bug","insect","beetle","butterfly","dragonfly"],
-        bugVerb: ["catch"],
+        describeBugHunt: [
+            new ExpansionRuleBuilder({
+                toolNoun: ["bug","insect","beetle","butterfly","dragonfly"],
+                toolVerb: ["catch"],
+                toolExtra: [""]
+            })
+        ],
         bugTopic:[
-            "Are you #bugVerb.ing# #lotOf.a# #bugNoun.s# with that #net#, #player#?"
+            "[#describeBugHunt#][tool:#net#]#heldToolComment##toolExtra#"
         ],
     });
 }

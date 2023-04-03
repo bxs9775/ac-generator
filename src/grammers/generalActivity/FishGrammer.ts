@@ -6,9 +6,8 @@ export async function createFishGrammar(month:number):Promise<GrammerBuilder>{
     var fishGrammar = new GrammerBuilder({
         topic: ["#fishTopic#"],
         fishingrod: ["[adj:#baseToolAdj#,fish ]#adj#fishing rod","[adj:#baseToolAdj#,fish ]#adj#rod"],
-        fishVerb: ["catch"],
         fish: ["#riverFish#","#oceanFish#","#pondFish#"],
-        describeFish:[
+        describeFishType:[
             new ExpansionRuleBuilder({
                 fishLoc: "river",
                 fishType: "#riverFish#"
@@ -22,12 +21,14 @@ export async function createFishGrammar(month:number):Promise<GrammerBuilder>{
                 fishType: "#pondFish#"
             })
         ],
-        fishNoun: ["fish"],
-        fishExtra: [""," I hope you #fishVerb# #lotOf.a# #fishNoun.s#."],
+        describeFishing: [new ExpansionRuleBuilder({
+            toolNoun: ["fish"],
+            toolExtra: [""," I hope you catch #lotOf.a# #toolNoun.s#."],
+            toolVerb: ["catch"], 
+        })],
         fishTopic:[
-            "Are you #fishVerb.ing# #lotOf.a# #fishNoun.s# with that #fishingrod#, #player#?#fishExtra#",
-            "What is that #fishingrod# for, #catch-phrase#? Are you #fishVerb.ing# #fishNoun.s#?#fishExtra#",
-            "[#describeFish#]I hear that #town#'s #fishLoc.s# are full of #fishType#."
+            "[#describeFishing#][tool:#fishingrod#][toolGeneral:fishing rod]#heldToolComment##toolExtra#",
+            "[#describeFishType#][#describeFishing#][tool:#fishingrod#][toolGeneral:fishing rod]I hear that #town#'s #fishLoc.s# are full of #fishType#.#activityRecommenation#"
         ]
     });
     fishGrammar.addObject(new GrammerBuilder(await AcApiHelper.getFish(month)));

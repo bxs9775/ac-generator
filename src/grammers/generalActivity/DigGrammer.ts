@@ -7,35 +7,35 @@ export function createDigGrammar():GrammerBuilder{
         topic: ["#digTopic#"],
         shovel: ["[adj:#baseToolAdj#,printed-design ]#adj#shovel"],
         digTopic:[
-            "[#describeDig#]What is that #shovel# for, #catch-phrase#? Are you #digVerb.ing# #digNoun.s#?#digExtra#",
-            "[#describeDigTreasure#]I hear there are #lotOf.a# #digNoun.s# around #town#. Why don't you grab a shovel and start digging?"],
+            "[#describeDig#][tool:#shovel#][toolGeneral:shovel]#heldToolComment##toolExtra#",
+            "[#describeDigTreasure#][tool:#shovel#][toolGeneral:shovel]I hear there are #lotOf.a# #toolNoun.s# around #town#.#activityRecommenation#"],
         describeDigTreasure: [
             new ExpansionRuleBuilder({
-                digNoun: "fossel",
-                digVerb: ["dig up","hunt for"],
-                digExtra: [""]
+                toolNoun: "fossel",
+                toolVerb: ["dig up","hunt for"],
+                toolExtra: [""]
             }),
             new ExpansionRuleBuilder({
-                digNoun: "gyroid",
-                digVerb: ["dig up","hunt for"],
-                digExtra: [""]
+                toolNoun: "gyroid",
+                toolVerb: ["dig up","hunt for"],
+                toolExtra: [""]
             })
         ],
         describeDigOther: [
             new ExpansionRuleBuilder({
-                digNoun: "pitfall",
-                digVerb: ["plant","bury"],
-                digExtra: [""]
+                toolNoun: "pitfall",
+                toolVerb: ["plant","bury"],
+                toolExtra: [""]
             }),
             new ExpansionRuleBuilder({
-                digNoun: "flower",
-                digVerb: ["plant","grow"],
-                digExtra: [""]
+                toolNoun: "flower",
+                toolVerb: ["plant","grow"],
+                toolExtra: [""]
             }),
             new ExpansionRuleBuilder({
-                digNoun: "tree",
-                digVerb: ["plant","grow"],
-                digExtra: [""]
+                toolNoun: "tree",
+                toolVerb: ["plant","grow"],
+                toolExtra: [""]
             })
         ],
         describeDig: ["#describeDigTreasure#","#describeDigOther#"]
