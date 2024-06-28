@@ -1,7 +1,13 @@
 // imports
+import * as dotenv from "dotenv";
 import path from "path";
 import express from "express";
+
+// configures env variables
+dotenv.config();
+// local imports
 import { dialogueRouter } from "./controllers/dialogueRouter";
+
 
 // sets the port for the server to use
 let portNum : number = 3000;

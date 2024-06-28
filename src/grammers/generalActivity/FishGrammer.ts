@@ -1,6 +1,8 @@
 import ExpansionRuleBuilder from "../../classes/Builders/ExpansionRuleBuilder";
 import GrammerBuilder from "../../classes/Builders/GrammerBuilder";
-import AcApiHelper from "../../helpers/acnhapiHelper";
+import VillagerHelper from "../../helpers/nookpediaHelper";
+
+let villagerHelper = new VillagerHelper();
 
 export async function createFishGrammar(month:number):Promise<GrammerBuilder>{
     var fishGrammar = new GrammerBuilder({
@@ -31,7 +33,7 @@ export async function createFishGrammar(month:number):Promise<GrammerBuilder>{
             "[#describeFishType#][#describeFishing#][tool:#fishingrod#][toolGeneral:fishing rod]I hear that #town#'s #fishLoc.s# are full of #fishType#.#activityRecommenation#"
         ]
     });
-    fishGrammar.addObject(new GrammerBuilder(await AcApiHelper.getFish(month)));
+    fishGrammar.addObject(new GrammerBuilder(await villagerHelper.getFish(month)));
 
     return fishGrammar;
 }

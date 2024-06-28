@@ -6,18 +6,23 @@ export default class Villager{
     personality:string;
     species:string;
     gender:string;
-    hobby:string;
+    hobby:string = '';
     catchphrase:string;
     iconUri:string;
 
     constructor(villager:any){
-        this.name = villager.name["name-USen"];
+        this.name = villager.name;
         this.personality = villager.personality;
         this.species = villager.species;
         this.gender = villager.gender;
-        this.hobby = villager.hobby;
-        this.catchphrase = villager["catch-phrase"];
-        this.iconUri = villager.icon_uri;
+        this.catchphrase = villager.phrase;
+       
+        if(villager.nh_details){
+            this.hobby = villager.nh_details.hobby;
+            this.iconUri = villager.nh_details.icon_url;
+        } else {
+            this.iconUri = villager.image_url;
+        }
     }
 
     toJson():any{
