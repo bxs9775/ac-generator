@@ -1,11 +1,23 @@
 import TraceryBuilder from "./TraceryBuilder";
 import RuleDictionary from "./RuleDictionary";
 
+/**
+ * TraceryBuilder subclass for building a Tracery expansion rule
+ * ex: "[toolVerb:catch][toolNoun:bug,butterfly][toolExtra:]"
+ */
 export default class ExpansionRuleBuilder extends TraceryBuilder{
+    /**
+     * Constructs a new ExpansionRuleBuilder
+     * @param {RuleDictionary} startingObj A dictionary of grammer rules used to initialize the builder
+     */
     constructor(startingObj:RuleDictionary){
         super(startingObj);
     }
 
+    /**
+     * Uses the builder to build a Trancery grammer JSON object
+     * @returns a JSON object containing Tracery grammer.
+     */
     build():string{
         var rules = Object.entries(this.data);
         return rules.reduce((result,rule) => {

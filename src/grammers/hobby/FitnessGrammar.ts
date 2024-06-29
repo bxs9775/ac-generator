@@ -1,6 +1,9 @@
 import ExpansionRuleBuilder from "../../classes/Builders/ExpansionRuleBuilder"
 import GrammerBuilder from "../../classes/Builders/GrammerBuilder";
-
+/**
+ * Creates the Tracery Grammer object for the fitness hobby
+ * @returns  GrammerBuilder object for the fitness hobby
+ */
 export function createFitnessGrammar():GrammerBuilder{
     return new GrammerBuilder({
         "topic": ["#exerciseTopic#"],

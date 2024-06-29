@@ -1,6 +1,9 @@
 import ExpansionRuleBuilder from "../../classes/Builders/ExpansionRuleBuilder"
 import GrammerBuilder from "../../classes/Builders/GrammerBuilder";
-
+/**
+ * Creates the Tracery Grammer object for the music hobby
+ * @returns  GrammerBuilder object for the music hobby
+ */
 export function createMusicGrammar():GrammerBuilder{
     return new GrammerBuilder({
         "topic": ["#musicTopic#"],

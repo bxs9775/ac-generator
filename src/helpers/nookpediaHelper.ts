@@ -2,17 +2,31 @@ import axios from "axios";
 import Villager from "../classes/Villager";
 import RuleDictionary from "../classes/Builders/RuleDictionary";
 
-
+/**
+ * enum for indicating whether to look for the northern or southern hemisphere
+ */
 enum Hemisphere{
     north='north',
     south='south'
 }
 
-
-export default class NookpediaHelpder{
+/**
+ * Class for fetching data from the Nookipedia API
+ */
+export default class NookpediaHelper{
+    /**
+     * Base API URL
+     */
     url:string;
+    /**
+     * request headers for all requests
+     */
     headers:{[key: string]:string|undefined};
     
+    /**
+     * Constructs a new NookpediaHelper class with the base URL and required headers
+     * NOOKIPEDIA_KEY needs to be set in a .env file at the base of the project.
+     */
     constructor(){
         this.url = "https://api.nookipedia.com";
         this.headers = {
@@ -21,7 +35,7 @@ export default class NookpediaHelpder{
         }
     }
     /**
-     * @summary Gets the name of a random villager
+     * Gets the name of a random villager
      * @returns the name of a random villager as a string
      */
     async getRandomVillagerName():Promise<string|undefined> {
@@ -45,6 +59,11 @@ export default class NookpediaHelpder{
         }
     }
 
+    /**
+     * Gets the villager details for a specific villager
+     * @param {string} name the name of the villager whose details to fetch
+     * @returns Villager object for the specific villager, of the fetch fails instead returns null
+     */
     async getVillager(name:string):Promise<Villager|null>{
         try{
             var acRes = await axios.get(`${this.url}/villagers`,{
@@ -62,13 +81,19 @@ export default class NookpediaHelpder{
             return null;
         }
     }
-
+    /**
+     * Gets fish data for the given month and hemisphere
+     * @param {number} month the month to fetch fish data for
+     * @param {Hemisphere} hemi which hemisphere do we want data for 
+     * @returns a dictionary of grammer rules for fishing
+     */
     async getFish(month:number|string,hemi:Hemisphere=Hemisphere.north):Promise<RuleDictionary>{
         try{
             var acRes = await axios.get(`${this.url}/nh/fish`,{
                 params: {
                     'month': month
-                }
+                },
+                'headers': this.headers
             });
             var fish = acRes.data[hemi];
             return {

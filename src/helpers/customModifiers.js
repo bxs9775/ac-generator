@@ -1,3 +1,6 @@
+/**
+ * provides custom Tracery modifiers
+ */
 var customModifiers = {
     ing: function(s){
         var i = s.indexOf(" ");

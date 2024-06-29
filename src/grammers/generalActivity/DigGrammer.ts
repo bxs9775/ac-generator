@@ -1,7 +1,10 @@
 import { describe } from "node:test";
 import ExpansionRuleBuilder from "../../classes/Builders/ExpansionRuleBuilder";
 import GrammerBuilder from "../../classes/Builders/GrammerBuilder";
-
+/**
+ * Creates the Tracery Grammer object for digging/fossil hunting
+ * @returns  GrammerBuilder object for the digging/fossil hunting activity
+ */
 export function createDigGrammar():GrammerBuilder{
     return new GrammerBuilder({
         topic: ["#digTopic#"],

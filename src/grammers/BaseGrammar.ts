@@ -1,6 +1,10 @@
 import ExpansionRuleBuilder from "../classes/Builders/ExpansionRuleBuilder"
 import GrammerBuilder from "../classes/Builders/GrammerBuilder";
 
+/**
+ * Creates the base Tracery Grammer object for all villagers
+ * @returns  base GrammerBuilder object
+ */
 export function createBaseGrammer():GrammerBuilder{
     return new GrammerBuilder({
         player: ["#playerName#"],

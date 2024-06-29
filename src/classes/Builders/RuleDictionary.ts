@@ -1,4 +1,4 @@
-import ExpansionRuleBuilder from "./ExpansionRuleBuilder";
-
-//export default interface RuleDictionary { [key:string]: Array<string>|Array<ExpansionRuleBuilder> };
+/**
+ * Interface for a dictionary of grammer rules
+ */
 export default interface RuleDictionary { [key:string]: any };

@@ -1,6 +1,9 @@
 import ExpansionRuleBuilder from "../../classes/Builders/ExpansionRuleBuilder"
 import GrammerBuilder from "../../classes/Builders/GrammerBuilder";
-
+/**
+ * Creates the Tracery Grammer object for the play hobby
+ * @returns  GrammerBuilder object for the play hobby
+ */
 export function createPlayGrammar():GrammerBuilder{
     return new GrammerBuilder({
         "topic": ["#playTopic#"],

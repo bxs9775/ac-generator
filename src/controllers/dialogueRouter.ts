@@ -10,6 +10,11 @@ export const dialogueRouter = express.Router();
 
 let villagerHelper = new VillagerHelper();
 
+/**
+ * Helper method for fetching villager data from the API
+ * @param {string} name name of the villager to fetch, if not provided the router picks a random villager 
+ * @returns the VillagerResponse object for the request
+ */
 async function getVillager(name?:string):Promise<VillagerResponse>{
   if(typeof(name) != undefined){
     name = await villagerHelper.getRandomVillagerName();
@@ -25,6 +30,9 @@ async function getVillager(name?:string):Promise<VillagerResponse>{
   }
 }
 
+/**
+ * Gets generated dialogue for a villager, if a villager name is not provided a random villager is selected
+ */
 dialogueRouter.get('/dialogue',async (req,res) => {
   let villagerResp = await getVillager(req.query.name as string);
   console.log('Response:\n',villagerResp);
@@ -50,9 +58,14 @@ dialogueRouter.get('/dialogue',async (req,res) => {
   })
 });
 
+/**
+ * Gets the JSON grammer rules object for a villager, if a villager name is not provided a random villager is selected
+ */
 dialogueRouter.get('/rules', async (req,res) => {
   let villagerResp = await getVillager(req.query.name as string);
-  if(typeof(villagerResp.error) != undefined){
+  console.log('Response:\n',villagerResp);
+  console.log('Has error: ',typeof(villagerResp.error) !== "undefined");
+  if(typeof(villagerResp.error) !== "undefined"){
     let error = villagerResp.error as ErrorResponse;
     return res.status(error.code).json({ 
       "msg": error.msg,

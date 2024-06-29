@@ -1,6 +1,9 @@
 import ExpansionRuleBuilder from "../../classes/Builders/ExpansionRuleBuilder"
 import GrammerBuilder from "../../classes/Builders/GrammerBuilder";
-
+/**
+ * Creates the Tracery Grammer object for the nature hobby
+ * @returns  GrammerBuilder object for the nature hobby
+ */
 export function createNatureGrammar():GrammerBuilder{
     return new GrammerBuilder({
         "topic": ["#natureTopic#"],

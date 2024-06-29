@@ -10,21 +10,35 @@ import { createPlayGrammar } from "../grammers/hobby/PlayGrammar";
 import { createNatureGrammar } from "../grammers/hobby/NatureGrammar";
 import { createBugGrammar } from "../grammers/generalActivity/BugGrammer";
 
+/**
+ * Factory class for creating new grammer objects
+ */
 export default class GrammerFactory{
+    /**
+     * Generates Tracery grammer for a specific villager
+     * @param {Villager} villager the villager to generate grammer for 
+     * @returns GrammerBuilder instance containing the grammer for the specific villager
+     */
     static async getGrammer(villager:Villager):Promise<GrammerBuilder>{
+        // calculates date info
         var today = new Date();
         var month = today.getMonth()+1;
-
+        
+        // saves base vilager data
         var villagerGrammer = new GrammerBuilder({
             name: [villager.name],
             "catch-phrase": [villager.catchphrase],
             month: today.toLocaleString('default', { month: 'long' })
         });
+
+        // adds base grammer
         var grammar = createBaseGrammer()
             .addObject(villagerGrammer)
             .addObject(createDigGrammar())
             .addObject(await createFishGrammar(month))
             .addObject(createBugGrammar());
+
+        // adds personality specific grammer
         if(villager.personality != "Lazy"){
             grammar.data["describeFishing"][0].addRule("toolVerb","reel in","land","hook");
             grammar.addRule("lotOf","lot of")
@@ -157,6 +171,8 @@ export default class GrammerFactory{
                 grammar.addRule("activityRecommendation","I would #toolVerb# for #toolNoun.s#, but it sounds sweaty.");
                 break;
         }
+
+        // adds hobby-specific grammer
         switch(villager.hobby){
             case "Fitness":
                 grammar.addObject(createFitnessGrammar());

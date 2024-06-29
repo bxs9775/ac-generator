@@ -3,11 +3,27 @@ import TraceryBuilder from "./TraceryBuilder";
 import ExpansionRuleBuilder from "./ExpansionRuleBuilder";
 import RuleDictionary from "./RuleDictionary";
 
+/**
+ * TraceryBuilder subclass for building a Tracery grammer set
+ * ex:
+ * {
+ *  "animal": ["dog","cat","bird"],
+ *  "color": ["red","yellow", "blue"]
+ * }
+ */
 export default class GrammerBuilder extends TraceryBuilder{
+    /**
+     * Constructs a new GrammerBuilder
+     * @param {RuleDictionary} startingObj A dictionary of grammer rules used to initialize the builder
+     */
     constructor(startingObj:RuleDictionary){
         super(startingObj);
     }
 
+    /**
+     * Uses the builder to build a Trancery grammer JSON object
+     * @returns a JSON object containing Tracery grammer.
+     */
     build():any{
         var rules = Object.entries(this.data);
         var rawGrammer = rules.reduce<{[key:string]: Array<string>}>((result,[key,rule]) => {

@@ -3,7 +3,10 @@ import GrammerBuilder from "../../classes/Builders/GrammerBuilder";
 import VillagerHelper from "../../helpers/nookpediaHelper";
 
 let villagerHelper = new VillagerHelper();
-
+/**
+ * Creates the Tracery Grammer object for fishing
+ * @returns  GrammerBuilder object for the fishing activity
+ */
 export async function createFishGrammar(month:number):Promise<GrammerBuilder>{
     var fishGrammar = new GrammerBuilder({
         topic: ["#fishTopic#"],
