@@ -97,9 +97,9 @@ export default class NookpediaHelper{
             });
             var fish = acRes.data[hemi];
             return {
-                "riverFish": fish.filter((fsh:any) => fsh.availability.location.includes("River")).map((fsh:any) => fsh.name["name-USen"]),
-                "oceanFish": fish.filter((fsh:any) => fsh.availability.location.includes("Sea")).map((fsh:any) => fsh.name["name-USen"]),
-                "pondFish": fish.filter((fsh:any) => fsh.availability.location.includes("Pond")).map((fsh:any) => fsh.name["name-USen"]),
+                "riverFish": fish.filter((fsh:any) => fsh.location === "River").map((fsh:any) => fsh.name),
+                "oceanFish": fish.filter((fsh:any) => fsh.location === "Sea").map((fsh:any) => fsh.name),
+                "pondFish": fish.filter((fsh:any) => fsh.location === "Pond").map((fsh:any) => fsh.name),
             }
         }
         catch(error){
