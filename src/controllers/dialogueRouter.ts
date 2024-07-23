@@ -1,14 +1,12 @@
 import express from "express";
 import Villager from "../classes/Villager";
-import VillagerHelper from "../helpers/nookpediaHelper";
+import villagerHelper from "../helpers/nookpediaHelper";
 import VillagerResponse from "../classes/VillagerResponse";
 import GrammerBuilder from "../classes/Builders/GrammerBuilder";
 import Generator from "../classes/Generator";
 import ErrorResponse from "../classes/ErrorResponse";
 
 export const dialogueRouter = express.Router();
-
-let villagerHelper = new VillagerHelper();
 
 /**
  * Helper method for fetching villager data from the API

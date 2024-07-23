@@ -1,8 +1,7 @@
 import ExpansionRuleBuilder from "../../classes/Builders/ExpansionRuleBuilder";
 import GrammerBuilder from "../../classes/Builders/GrammerBuilder";
-import VillagerHelper from "../../helpers/nookpediaHelper";
+import villagerHelper from "../../helpers/nookpediaHelper";
 
-let villagerHelper = new VillagerHelper();
 /**
  * Creates the Tracery Grammer object for fishing
  * @returns  GrammerBuilder object for the fishing activity

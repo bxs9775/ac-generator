@@ -13,11 +13,12 @@ enum Hemisphere{
 /**
  * Class for fetching data from the Nookipedia API
  */
-export default class NookpediaHelper{
+class NookpediaHelper{
     /**
      * Base API URL
      */
     url:string;
+    villagerNames:string[] = [];
     /**
      * request headers for all requests
      */
@@ -34,6 +35,20 @@ export default class NookpediaHelper{
             'Accept-Version': '1.0.0'
         }
     }
+    
+    async getAllNames() {
+        try{
+            var acRes = await axios.get(`${this.url}/villagers`,{
+                'params': { 'excludedetails': true },
+                'headers': this.headers
+            });
+            this.villagerNames = acRes.data;
+        } catch(error){
+            console.log('Error constructing Nookipedia Helper - villager data not found');
+        }
+    }
+
+
     /**
      * Gets the name of a random villager
      * @returns the name of a random villager as a string
@@ -41,17 +56,13 @@ export default class NookpediaHelper{
     async getRandomVillagerName():Promise<string|undefined> {
         try{
             // gets a list of all villagers
-            var acRes = await axios.get(`${this.url}/villagers`,{
-                'params': { 'excludedetails': true },
-                'headers': this.headers
-            });
-            var names = acRes.data;
+           
             // picks a random villager
             // code from https://stackoverflow.com/questions/5915096/get-a-random-item-from-a-javascript-array
-            var villagerIndex = Math.floor(Math.random()*names.length);
+            var villagerIndex = Math.floor(Math.random()*this.villagerNames.length);
 
             // return the selected name
-            return names[villagerIndex];
+            return this.villagerNames[villagerIndex];
         }
         catch(error){
             //console.log(error);
@@ -81,6 +92,7 @@ export default class NookpediaHelper{
             return null;
         }
     }
+
     /**
      * Gets fish data for the given month and hemisphere
      * @param {number} month the month to fetch fish data for
@@ -108,3 +120,7 @@ export default class NookpediaHelper{
         }
     }
 }
+
+let instance:NookpediaHelper =  new NookpediaHelper();
+instance.getAllNames()
+export default instance;
