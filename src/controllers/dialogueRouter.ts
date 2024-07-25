@@ -14,11 +14,8 @@ export const dialogueRouter = express.Router();
  * @returns the VillagerResponse object for the request
  */
 async function getVillager(name?:string):Promise<VillagerResponse>{
-  if(typeof(name) != undefined){
-    name = await villagerHelper.getRandomVillagerName();
-    if(typeof(name) === "undefined"){
-      return new VillagerResponse(undefined,new ErrorResponse(500,'Unexpected error while fetching villager names.'));
-    }
+  if(!name){
+    name = villagerHelper.getRandomVillagerName();
   }
   var villager = await villagerHelper.getVillager(name as string);
   if(!villager){

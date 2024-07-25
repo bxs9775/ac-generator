@@ -53,21 +53,11 @@ class NookpediaHelper{
      * Gets the name of a random villager
      * @returns the name of a random villager as a string
      */
-    async getRandomVillagerName():Promise<string|undefined> {
-        try{
-            // gets a list of all villagers
-           
-            // picks a random villager
-            // code from https://stackoverflow.com/questions/5915096/get-a-random-item-from-a-javascript-array
-            var villagerIndex = Math.floor(Math.random()*this.villagerNames.length);
+    getRandomVillagerName():string {
+       var villagerIndex = Math.floor(Math.random()*this.villagerNames.length);
 
-            // return the selected name
-            return this.villagerNames[villagerIndex];
-        }
-        catch(error){
-            //console.log(error);
-            return undefined;
-        }
+        // return the selected name
+        return this.villagerNames[villagerIndex];
     }
 
     /**
