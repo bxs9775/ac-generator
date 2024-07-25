@@ -69,6 +69,21 @@ export default class GrammerFactory{
                 grammar.addRule("activityGuess"," #toolVerb.capitalize.ing# #toolNoun.s#?"," What are ya doing? #toolVerb.ing.capitalize#?");
                 break;
             case "Jock":
+                grammar.addRule('hello','yo','hey', 'hey there', 'heya','lookin\' built','sup','heeeya');
+                grammar.addRule('greeting','Hey, hey!','Morniiiing!','Hey listen up!');
+                grammar.addRule('howAre', 'How ya doin\',  #catch-phrase#?',
+                    'What\'s up?',
+                    'Need something?',
+                    'You bringin\' it?',
+                    'Workin\' those legs?',
+                    'Feelin\' strong, #catch-phrase#?',
+                    'Whaddaya need, #catch-phrase#?',
+                    'Gettin\' an early start?',
+                    'We meet again!',
+                    'Wow, you just keep turning up today. It\'s like you\'re only playing offense, #catch-phrase#.',
+                    'Wow, you just keep turning up today.',
+                    'Are we playing follow the leader or something, #catch-phrase#?'
+                    );
                 grammar.addRule("player","coach","teammate");
                 (grammar.data["describeDigTreasure"] as Array<ExpansionRuleBuilder>).forEach(elem => elem.addRule("toolExtra"," That's a good idea for #digMuscle.a# workout."," You know #toolNoun# #toolVerb.ing# is good for developing your #digMuscle.s#?"," I should add that to my #digMuscle# regimen."));
                 (grammar.data["describeDigOther"] as Array<ExpansionRuleBuilder>).forEach(elem => elem.addRule("toolExtra"," That's a good idea for #digMuscle.a# workout."," You know #toolNoun# #toolVerb.ing# is good for developing your #digMuscle.s#?"," I should add that to my #digMuscle# regimen."));

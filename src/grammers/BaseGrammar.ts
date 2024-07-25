@@ -9,7 +9,7 @@ export function createBaseGrammer():GrammerBuilder{
     return new GrammerBuilder({
         player: ["#playerName#"],
         hello: ["hello"],
-        greeting: ["#hello.capitalize#, #player#."],
+        greeting: ["#hello.capitalize#, #player#.","#hello.capitalize#.","#hello.capitalize#, #catch-phrase#."],
         howare: ["How are you, #catch-phrase#?"],
         origin: ["#topic#","#greeting# #topic#","#greeting# #howare# #topic#"],
         heldToolComment: [
