@@ -1,5 +1,5 @@
 import axios from "axios";
-import Villager from "../classes/Villager";
+import BaseVillager from "../classes/Villager/BaseVillager";
 import RuleDictionary from "../classes/Builders/RuleDictionary";
 
 /**
@@ -65,7 +65,7 @@ class NookpediaHelper{
      * @param {string} name the name of the villager whose details to fetch
      * @returns Villager object for the specific villager, of the fetch fails instead returns null
      */
-    async getVillager(name:string):Promise<Villager|null>{
+    async getVillager(name:string):Promise<BaseVillager|null>{
         try{
             var acRes = await axios.get(`${this.url}/villagers`,{
                 'params': {
@@ -75,7 +75,7 @@ class NookpediaHelper{
                 'headers': this.headers
             });
             console.log('Villager data:\n',acRes.data[0]);
-            return new Villager(acRes.data[0]);
+            return new BaseVillager(acRes.data[0]);
         }
         catch(error){
             console.log(error);
@@ -87,7 +87,7 @@ class NookpediaHelper{
      * Gets fish data for the given month and hemisphere
      * @param {number} month the month to fetch fish data for
      * @param {Hemisphere} hemi which hemisphere do we want data for 
-     * @returns a dictionary of grammer rules for fishing
+     * @returns a dictionary of grammar rules for fishing
      */
     async getFish(month:number|string,hemi:Hemisphere=Hemisphere.north):Promise<RuleDictionary>{
         try{

@@ -1,13 +1,12 @@
 import ExpansionRuleBuilder from "../../classes/Builders/ExpansionRuleBuilder"
-import GrammerBuilder from "../../classes/Builders/GrammerBuilder";
+import GrammarBuilder from "../../classes/Builders/GrammarBuilder";
 /**
- * Creates the Tracery Grammer object for the fitness hobby
- * @returns  GrammerBuilder object for the fitness hobby
+ * Creates the Tracery Grammar object for the fitness hobby
+ * @returns  GrammarBuilder object for the fitness hobby
  */
-export function createFitnessGrammar():GrammerBuilder{
-    return new GrammerBuilder({
-        "topic": ["#exerciseTopic#"],
-        "exerciseTopic": ["[#describeExercise#]I'm thinking of doing some #exercise#. Its good for your #exerciseTarget.s#."],
+export function createFitnessGrammar():GrammarBuilder{
+    return new GrammarBuilder({
+        "topic": ["[#describeExercise#]I'm thinking of doing some #exercise#. Its good for your #exerciseTarget.s#."],
         "describeExercise": [
             new ExpansionRuleBuilder({
                 exercise: "cardio",

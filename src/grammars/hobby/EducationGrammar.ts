@@ -1,13 +1,12 @@
 import ExpansionRuleBuilder from "../../classes/Builders/ExpansionRuleBuilder";
-import GrammerBuilder from "../../classes/Builders/GrammerBuilder";
+import GrammarBuilder from "../../classes/Builders/GrammarBuilder";
 /**
- * Creates the Tracery Grammer object for the education hobby
- * @returns  GrammerBuilder object for the education hobby
+ * Creates the Tracery Grammar object for the education hobby
+ * @returns  GrammarBuilder object for the education hobby
  */
-export function createEducationGrammar():GrammerBuilder{
-    return new GrammerBuilder({
-        "topic": ["#educationTopic#"],
-        "educationTopic": [
+export function createEducationGrammar():GrammarBuilder{
+    return new GrammarBuilder({
+        "topic": [
             "[#describeEductation#]Have you found any #eduNoun.s# recently? If so, you should take them over to the museum.#museumExtra#.",
             "[#describeEductation#]Whenever I'm curious about #eduNoun.s# I go talk to Blathers at the #town# museum.#museumExtra#",
             "[#describeFish#]I've been learning about #fishLoc# fish recently. Do you want to hear some facts about #fishType#?"
@@ -17,7 +16,7 @@ export function createEducationGrammar():GrammerBuilder{
                 eduNoun: ["fossel"],
                 museumExtra: [
                     "",
-                    " Blathers gets really excited about fossels, but sometimes he talks too much. #catch-phrase.capitalize#...",
+                    " Blathers gets really excited about fossels, but sometimes he talks too much. #catchphrase.capitalize#...",
                     " Blathers is an expert on appraising fossils. It is so cool."
                 ]
             }),

@@ -1,13 +1,12 @@
 import ExpansionRuleBuilder from "../../classes/Builders/ExpansionRuleBuilder"
-import GrammerBuilder from "../../classes/Builders/GrammerBuilder";
+import GrammarBuilder from "../../classes/Builders/GrammarBuilder";
 /**
- * Creates the Tracery Grammer object for the nature hobby
- * @returns  GrammerBuilder object for the nature hobby
+ * Creates the Tracery Grammar object for the nature hobby
+ * @returns  GrammarBuilder object for the nature hobby
  */
-export function createNatureGrammar():GrammerBuilder{
-    return new GrammerBuilder({
-        "topic": ["#natureTopic#"],
-        "natureTopic": [
+export function createNatureGrammar():GrammarBuilder{
+    return new GrammarBuilder({
+        "topic": [
             "I love planting and tending to flowers. What about you, #player#? Do you like to garden?",
             "There is nothing like being outside.",
             "I'm thinking of growing #flower.s# and #flower.s#. What do you think?",

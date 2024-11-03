@@ -1,13 +1,12 @@
 import ExpansionRuleBuilder from "../../classes/Builders/ExpansionRuleBuilder"
-import GrammerBuilder from "../../classes/Builders/GrammerBuilder";
+import GrammarBuilder from "../../classes/Builders/GrammarBuilder";
 /**
- * Creates the Tracery Grammer object for the music hobby
- * @returns  GrammerBuilder object for the music hobby
+ * Creates the Tracery Grammar object for the music hobby
+ * @returns  GrammarBuilder object for the music hobby
  */
-export function createMusicGrammar():GrammerBuilder{
-    return new GrammerBuilder({
-        "topic": ["#musicTopic#"],
-        "musicTopic": ["[#describeMusic#]I like listening to #musicGenre# music. What about you, #player#?","[#describeMusic#]I'm really into #musicGenre# lately. My favorite song has to be #musicSong#."],
+export function createMusicGrammar():GrammarBuilder{
+    return new GrammarBuilder({
+        "topic": ["[#describeMusic#]I like listening to #musicGenre# music. What about you, #player#?","[#describeMusic#]I'm really into #musicGenre# lately. My favorite song has to be #musicSong#."],
         "describeMusic": [
             new ExpansionRuleBuilder({
                 musicGenre: "pop",

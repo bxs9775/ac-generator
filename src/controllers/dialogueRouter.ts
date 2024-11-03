@@ -1,10 +1,10 @@
 import express from "express";
-import Villager from "../classes/Villager";
-import villagerHelper from "../helpers/nookpediaHelper";
-import VillagerResponse from "../classes/VillagerResponse";
-import GrammerBuilder from "../classes/Builders/GrammerBuilder";
-import Generator from "../classes/Generator";
+import BaseVillager from "../classes/Villager/BaseVillager";
+import BaseVillagerHelper from "../helpers/nookpediaHelper";
+import BaseVillagerResponse from "../classes/VillagerResponse";
+import GrammarBuilder from "../classes/Builders/GrammarBuilder";
 import ErrorResponse from "../classes/ErrorResponse";
+import TopicEnum from "../enums/TopicEnum";
 
 export const dialogueRouter = express.Router();
 
@@ -13,15 +13,15 @@ export const dialogueRouter = express.Router();
  * @param {string} name name of the villager to fetch, if not provided the router picks a random villager 
  * @returns the VillagerResponse object for the request
  */
-async function getVillager(name?:string):Promise<VillagerResponse>{
+async function getVillager(name?:string):Promise<BaseVillagerResponse>{
   if(!name){
-    name = villagerHelper.getRandomVillagerName();
+    name = BaseVillagerHelper.getRandomVillagerName();
   }
-  var villager = await villagerHelper.getVillager(name as string);
+  var villager = await BaseVillagerHelper.getVillager(name as string);
   if(!villager){
-    return new VillagerResponse(undefined,new ErrorResponse(404,`Villager not found with name = ${name}`));
+    return new BaseVillagerResponse(undefined,new ErrorResponse(404,`Villager not found with name = ${name}`));
   } else {
-    return new VillagerResponse(villager);
+    return new BaseVillagerResponse(villager);
   }
 }
 
@@ -38,15 +38,15 @@ dialogueRouter.get('/dialogue',async (req,res) => {
       "msg": error.msg,
     });
   }
-  var villager:Villager = villagerResp.villager as Villager;
+  var villager:BaseVillager = villagerResp.villager as BaseVillager;
   var playerName: string = (req.query.playerName)?req.query.playerName as string:"Player";
   var town: string = (req.query.town)?req.query.town as string:"Town";
+  
+  var topic:TopicEnum = (req.query.topic)?TopicEnum[req.query.topic as keyof typeof TopicEnum]:TopicEnum.Hobby;
 
-  var generator = new Generator(villager);
-  var _ = await generator.createBuilder();
-
-  var options = new GrammerBuilder({ playerName: [playerName], town: [town] });
-  var dialogue = generator.generate(options);
+  var builder = new GrammarBuilder({ playerName: [playerName], town: [town] });
+  var dialogue = villager.generateGrammar(builder,topic).generate();
+  
   return res.status(200).json({
     "villager": villager.toJson(),
     "dialogue": dialogue
@@ -54,7 +54,7 @@ dialogueRouter.get('/dialogue',async (req,res) => {
 });
 
 /**
- * Gets the JSON grammer rules object for a villager, if a villager name is not provided a random villager is selected
+ * Gets the JSON grammar rules object for a villager, if a villager name is not provided a random villager is selected
  */
 dialogueRouter.get('/rules', async (req,res) => {
   let villagerResp = await getVillager(req.query.name as string);
@@ -66,12 +66,18 @@ dialogueRouter.get('/rules', async (req,res) => {
       "msg": error.msg,
     });
   }
-  var villager:Villager = villagerResp.villager as Villager;
-  var generator = new Generator(villager);
-  var _ = await generator.createBuilder();
+  var villager:BaseVillager = villagerResp.villager as BaseVillager;
+
+  var villager:BaseVillager = villagerResp.villager as BaseVillager;
+  var playerName: string = (req.query.playerName)?req.query.playerName as string:"Player";
+  var town: string = (req.query.town)?req.query.town as string:"Town";
+  
+  var topic:TopicEnum = (req.query.topic)?TopicEnum[req.query.topic as keyof typeof TopicEnum]:TopicEnum.Hobby;
+
+  var builder = new GrammarBuilder({ playerName: [playerName], town: [town] });
+  var grammar = villager.generateGrammar(builder,topic);
 
   return res.status(200).json({
-    raw: generator.builder.data,
-    grammer: generator.builder.build()
+    raw: grammar.rawGrammar
   });
 });

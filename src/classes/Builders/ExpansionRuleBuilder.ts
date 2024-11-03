@@ -8,15 +8,15 @@ import RuleDictionary from "./RuleDictionary";
 export default class ExpansionRuleBuilder extends TraceryBuilder{
     /**
      * Constructs a new ExpansionRuleBuilder
-     * @param {RuleDictionary} startingObj A dictionary of grammer rules used to initialize the builder
+     * @param {RuleDictionary} startingObj A dictionary of grammar rules used to initialize the builder
      */
-    constructor(startingObj:RuleDictionary){
+    constructor(startingObj:RuleDictionary={}){
         super(startingObj);
     }
 
     /**
-     * Uses the builder to build a Trancery grammer JSON object
-     * @returns a JSON object containing Tracery grammer.
+     * Uses the builder to build a Trancery grammar JSON object
+     * @returns a JSON object containing Tracery grammar.
      */
     build():string{
         var rules = Object.entries(this.data);

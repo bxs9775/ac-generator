@@ -1,4 +1,4 @@
-import Villager from "./Villager";
+import BaseVillager from "./Villager/BaseVillager";
 import ErrorResponse from './ErrorResponse';
 
 /**
@@ -8,7 +8,7 @@ export default class VillagerResponse{
     /**
      * Data on the villager. If something went wrong during fetching data, this will be undefined
      */
-    villager?:Villager;
+    villager?:BaseVillager;
     /**
      * Error data. If the fetch succeeds this will be undefined
      */
@@ -19,7 +19,7 @@ export default class VillagerResponse{
      * @param {Villager} villager fetched villager data 
      * @param {ErrorResponse} error error data 
      */
-    constructor(villager?:Villager,error?:ErrorResponse){
+    constructor(villager?:BaseVillager,error?:ErrorResponse){
         this.villager=villager;
         this.error=error;
     }

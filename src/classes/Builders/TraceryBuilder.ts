@@ -3,11 +3,11 @@ import ExpansionRuleBuilder from "./ExpansionRuleBuilder";
 import RuleDictionary from "./RuleDictionary";
 
 /**
- * Base class for building a Tracery grammer object
+ * Base class for building a Tracery grammar object
  */
 export default class TraceryBuilder{
     /**
-     * The dictionary of Tracery grammer rules being built by this object.
+     * The dictionary of Tracery grammar rules being built by this object.
      */
     data: RuleDictionary
 
@@ -15,12 +15,12 @@ export default class TraceryBuilder{
      * Constructs base TraceryBuilder
      * @param {RuleDictionary} startingObj The starting object for the builder
      */
-    constructor(startingObj:RuleDictionary){
+    constructor(startingObj:RuleDictionary={}){
         this.data = startingObj;
     }
 
     /**
-     * Adds a new grammer rule to the builder
+     * Adds a new grammar rule to the builder
      * @param {string} rule the key for the new rule
      * @param {Array} values an array of objects to associate with the rule
      * @returns the TraceryBuilder instance for call chaining

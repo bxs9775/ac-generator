@@ -1,14 +1,17 @@
 import ExpansionRuleBuilder from "../../classes/Builders/ExpansionRuleBuilder";
-import GrammerBuilder from "../../classes/Builders/GrammerBuilder";
-import villagerHelper from "../../helpers/nookpediaHelper";
+import GrammarBuilder from "../../classes/Builders/GrammarBuilder";
+import BaseVillagerHelper from "../../helpers/nookpediaHelper";
 
 /**
- * Creates the Tracery Grammer object for fishing
- * @returns  GrammerBuilder object for the fishing activity
+ * Creates the Tracery Grammar object for fishing
+ * @returns  GrammarBuilder object for the fishing activity
  */
-export async function createFishGrammar(month:number):Promise<GrammerBuilder>{
-    var fishGrammar = new GrammerBuilder({
-        topic: ["#fishTopic#"],
+export async function createFishGrammar(month:number):Promise<GrammarBuilder>{
+    var fishGrammar = new GrammarBuilder({
+        topic: [
+            "[#describeFishing#][tool:#fishingrod#][toolGeneral:fishing rod]#heldToolComment##toolExtra#",
+            "[#describeFishType#][#describeFishing#][tool:#fishingrod#][toolGeneral:fishing rod]I hear that #town#'s #fishLoc.s# are full of #fishType#.#activityRecommenation#"
+        ],
         fishingrod: ["[adj:#baseToolAdj#,fish ]#adj#fishing rod","[adj:#baseToolAdj#,fish ]#adj#rod"],
         fish: ["#riverFish#","#oceanFish#","#pondFish#"],
         describeFishType:[
@@ -29,13 +32,9 @@ export async function createFishGrammar(month:number):Promise<GrammerBuilder>{
             toolNoun: ["fish"],
             toolExtra: [""," I hope you catch #lotOf.a# #toolNoun.s#."],
             toolVerb: ["catch"], 
-        })],
-        fishTopic:[
-            "[#describeFishing#][tool:#fishingrod#][toolGeneral:fishing rod]#heldToolComment##toolExtra#",
-            "[#describeFishType#][#describeFishing#][tool:#fishingrod#][toolGeneral:fishing rod]I hear that #town#'s #fishLoc.s# are full of #fishType#.#activityRecommenation#"
-        ]
+        })]
     });
-    fishGrammar.addObject(new GrammerBuilder(await villagerHelper.getFish(month)));
+    fishGrammar.addObject(new GrammarBuilder(await villagerHelper.getFish(month)));
 
     return fishGrammar;
 }

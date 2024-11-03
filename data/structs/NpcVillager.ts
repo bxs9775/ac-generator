@@ -1,6 +1,6 @@
-import Villager from "../../src/classes/Villager";
+import BaseVillager from "../../src/classes/Villager/BaseVillager";
 
-export default interface NpcVillager extends Villager{
+export default interface NpcVillager extends BaseVillager{
     personality:string;
     hobby:string;
     catchphrase:string;

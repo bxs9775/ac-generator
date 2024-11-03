@@ -1,17 +1,17 @@
 import { describe } from "node:test";
 import ExpansionRuleBuilder from "../../classes/Builders/ExpansionRuleBuilder";
-import GrammerBuilder from "../../classes/Builders/GrammerBuilder";
+import GrammarBuilder from "../../classes/Builders/GrammarBuilder";
 /**
- * Creates the Tracery Grammer object for digging/fossil hunting
- * @returns  GrammerBuilder object for the digging/fossil hunting activity
+ * Creates the Tracery Grammar object for digging/fossil hunting
+ * @returns  GrammarBuilder object for the digging/fossil hunting activity
  */
-export function createDigGrammar():GrammerBuilder{
-    return new GrammerBuilder({
-        topic: ["#digTopic#"],
-        shovel: ["[adj:#baseToolAdj#,printed-design ]#adj#shovel"],
-        digTopic:[
+export function createDigGrammar():GrammarBuilder{
+    return new GrammarBuilder({
+        topic: [
             "[#describeDig#][tool:#shovel#][toolGeneral:shovel]#heldToolComment##toolExtra#",
-            "[#describeDigTreasure#][tool:#shovel#][toolGeneral:shovel]I hear there are #lotOf.a# #toolNoun.s# around #town#.#activityRecommenation#"],
+            "[#describeDigTreasure#][tool:#shovel#][toolGeneral:shovel]I hear there are #lotOf.a# #toolNoun.s# around #town#.#activityRecommenation#"
+        ],
+        shovel: ["[adj:#baseToolAdj#,printed-design ]#adj#shovel"],
         describeDigTreasure: [
             new ExpansionRuleBuilder({
                 toolNoun: "fossel",
