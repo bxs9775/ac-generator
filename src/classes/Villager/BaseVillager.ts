@@ -56,12 +56,11 @@ export default class BaseVillager{
         
         // calculates date info
         var today = new Date();
-        var month = today.getMonth()+1;
-
+        
         var villagerGrammar = new GrammarBuilder({
             name: [villager.name],
-            'catchphrase': [villager.catchphrase],
-            month: today.toLocaleString('default', { month: 'long' })
+            catchphrase: [villager.phrase],
+            month: [today.toLocaleString('default', { month: 'long' })]
         })
         .addObject(generalGrammar);
 

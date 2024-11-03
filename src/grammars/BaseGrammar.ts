@@ -25,7 +25,8 @@ export let generalGrammar:GrammarBuilder = new GrammarBuilder({
         "",
         " You can #toolVerb# them with a #toolGeneral#."
     ],
-    baseToolAdj: ["flimsy ","","golden ","colorful ","outdoorsy "]
+    baseToolAdj: ["flimsy ","","golden ","colorful ","outdoorsy "],
+    lotOf: ["lot of"]
 });
 
 let bugGrammar:GrammarBuilder = new GrammarBuilder({
