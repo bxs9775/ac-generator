@@ -1,5 +1,5 @@
 import TopicEnum from "../../enums/TopicEnum";
-import baseGrammarSet, {generalGrammar,hobbyGrammars} from "../../grammars/BaseGrammar";
+import {baseGrammarSet,generalGrammar,hobbyGrammars} from "../../grammars/baseVillager";
 import GrammarBuilder from "../Builders/GrammarBuilder";
 import Grammar from "../Grammar";
 import GrammarSet from "../GrammarSet";
@@ -82,19 +82,19 @@ export default class BaseVillager{
 
         switch(villager.hobby){
             case "Fitness":
-                hobbyGrammar.addObject(hobbyGrammars.fitness);
+                hobbyGrammar.addObject(hobbyGrammars.get('fitness') as GrammarBuilder);
                 break;
             case "Music":
-                hobbyGrammar.addObject(hobbyGrammars.music);
+                hobbyGrammar.addObject(hobbyGrammars.get('music') as GrammarBuilder);
                 break;
             case "Play":
-                hobbyGrammar.addObject(hobbyGrammars.play);
+                hobbyGrammar.addObject(hobbyGrammars.get('play') as GrammarBuilder);
                 break;
             case "Nature":
-                hobbyGrammar.addObject(hobbyGrammars.nature);
+                hobbyGrammar.addObject(hobbyGrammars.get('nature') as GrammarBuilder);
                 break;
             case "Education":
-                hobbyGrammar.addObject(hobbyGrammars.education);
+                hobbyGrammar.addObject(hobbyGrammars.get('education') as GrammarBuilder);
                 break;
         }
         
