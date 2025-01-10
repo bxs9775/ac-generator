@@ -42,7 +42,15 @@ dialogueRouter.get('/dialogue',async (req,res) => {
   var playerName: string = (req.query.playerName)?req.query.playerName as string:"Player";
   var town: string = (req.query.town)?req.query.town as string:"Town";
   
-  var topic:TopicEnum = (req.query.topic)?TopicEnum[req.query.topic as keyof typeof TopicEnum]:TopicEnum.Hobby;
+  var rawTopic:string|undefined = req.query.topic as string|undefined;
+  console.log("Raw topic: ", rawTopic);
+  var topic:TopicEnum;
+  if(typeof rawTopic === 'undefined'){
+    topic = TopicEnum.sample();
+  } else {
+    topic = TopicEnum.get(rawTopic);
+  }
+  console.log('Topic: ',topic.toString());
 
   var builder = new GrammarBuilder({ playerName: [playerName], town: [town] });
   var dialogue = villager.generateGrammar(builder,topic).generate();
@@ -71,9 +79,16 @@ dialogueRouter.get('/rules', async (req,res) => {
   var villager:BaseVillager = villagerResp.villager as BaseVillager;
   var playerName: string = (req.query.playerName)?req.query.playerName as string:"Player";
   var town: string = (req.query.town)?req.query.town as string:"Town";
+  var rawTopic:string|undefined = req.query.topic as string|undefined;
+  console.log("Raw topic: ", rawTopic);
+  var topic:TopicEnum;
+  if(typeof rawTopic === 'undefined'){
+    topic = TopicEnum.sample();
+  } else {
+    topic = TopicEnum.get(rawTopic);
+  }
+  console.log('Topic: ',topic.toString());
   
-  var topic:TopicEnum = (req.query.topic)?TopicEnum[req.query.topic as keyof typeof TopicEnum]:TopicEnum.Hobby;
-
   var builder = new GrammarBuilder({ playerName: [playerName], town: [town] });
   var grammar = villager.generateGrammar(builder,topic);
 

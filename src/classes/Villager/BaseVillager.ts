@@ -63,8 +63,6 @@ export default class BaseVillager{
             month: [today.toLocaleString('default', { month: 'long' })]
         })
         .addObject(generalGrammar);
-
-
         
         // sets hobby and iconUri fields based on whether the villager has New Horizons details
         if(villager.nh_details){
@@ -79,23 +77,9 @@ export default class BaseVillager{
         this.grammars.set('general',villagerGrammar);
 
         let hobbyGrammar:GrammarBuilder = new GrammarBuilder();
-
-        switch(villager.hobby){
-            case "Fitness":
-                hobbyGrammar.addObject(hobbyGrammars.get('fitness') as GrammarBuilder);
-                break;
-            case "Music":
-                hobbyGrammar.addObject(hobbyGrammars.get('music') as GrammarBuilder);
-                break;
-            case "Play":
-                hobbyGrammar.addObject(hobbyGrammars.get('play') as GrammarBuilder);
-                break;
-            case "Nature":
-                hobbyGrammar.addObject(hobbyGrammars.get('nature') as GrammarBuilder);
-                break;
-            case "Education":
-                hobbyGrammar.addObject(hobbyGrammars.get('education') as GrammarBuilder);
-                break;
+        let rawHobbyGrammar:GrammarBuilder|undefined = hobbyGrammars.get(this.hobby.toLowerCase());
+        if(typeof rawHobbyGrammar !== "undefined"){
+            hobbyGrammar.addObject(rawHobbyGrammar);
         }
         
         this.grammars.set('hobby',hobbyGrammar);
@@ -106,9 +90,11 @@ export default class BaseVillager{
         
         let grammar = (new GrammarBuilder())
             .addObject(baseGrammar)
-            .addObject(this.grammars.get('general') as GrammarBuilder)
-            .addObject(this.grammars.get(topic.toString().toLowerCase()) as GrammarBuilder)
-
+            .addObject(this.grammars.get('general') as GrammarBuilder);
+        let topicGrammar:GrammarBuilder|undefined = this.grammars.get(topic.toString().toLowerCase());
+        if(typeof topicGrammar !== "undefined"){
+            grammar.addObject(topicGrammar);
+        }
         return grammar.build();
     }
 
