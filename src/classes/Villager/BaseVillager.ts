@@ -1,9 +1,9 @@
 import TopicEnum from "../../enums/TopicEnum";
-import {baseGrammarSet,generalGrammar,hobbyGrammars} from "../../grammars/baseVillager";
-import {generalGrammar as jockGrammar} from "../../grammars/jock"
+import GrammarPicker from "../GrammarPicker";
 import GrammarBuilder from "../Builders/GrammarBuilder";
 import Grammar from "../Grammar";
 import GrammarSet from "../GrammarSet";
+import VillagerGrammarPackage from "../VillagerGrammarPackage";
 
 /**
  * class for storing and managing villager details
@@ -57,16 +57,15 @@ export default class BaseVillager{
         
         // calculates date info
         var today = new Date();
+
+        var grammarPackage:VillagerGrammarPackage = GrammarPicker.selectGrammar(this.personality);
         
         var villagerGrammar = new GrammarBuilder({
             name: [villager.name],
             catchphrase: [villager.phrase],
             month: [today.toLocaleString('default', { month: 'long' })]
         })
-        .addObject(generalGrammar);
-        if(this.personality == 'Jock'){
-            villagerGrammar.addObject(jockGrammar);
-        }
+        .addObject(grammarPackage.generalGrammar);
         
         // sets hobby and iconUri fields based on whether the villager has New Horizons details
         if(villager.nh_details){
@@ -77,11 +76,11 @@ export default class BaseVillager{
         }
 
         this.grammars= (new GrammarSet())
-            .addGrammarSet(baseGrammarSet);
+            .addGrammarSet(grammarPackage.islandLifeGrammarSet);
         this.grammars.set('general',villagerGrammar);
 
         let hobbyGrammar:GrammarBuilder = new GrammarBuilder();
-        let rawHobbyGrammar:GrammarBuilder|undefined = hobbyGrammars.get(this.hobby.toLowerCase());
+        let rawHobbyGrammar:GrammarBuilder|undefined = grammarPackage.hobbyGrammarSet.get(this.hobby.toLowerCase());
         if(typeof rawHobbyGrammar !== "undefined"){
             hobbyGrammar.addObject(rawHobbyGrammar);
         }
