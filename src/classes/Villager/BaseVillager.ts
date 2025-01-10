@@ -1,5 +1,6 @@
 import TopicEnum from "../../enums/TopicEnum";
 import {baseGrammarSet,generalGrammar,hobbyGrammars} from "../../grammars/baseVillager";
+import {generalGrammar as jockGrammar} from "../../grammars/jock"
 import GrammarBuilder from "../Builders/GrammarBuilder";
 import Grammar from "../Grammar";
 import GrammarSet from "../GrammarSet";
@@ -63,6 +64,9 @@ export default class BaseVillager{
             month: [today.toLocaleString('default', { month: 'long' })]
         })
         .addObject(generalGrammar);
+        if(this.personality == 'Jock'){
+            villagerGrammar.addObject(jockGrammar);
+        }
         
         // sets hobby and iconUri fields based on whether the villager has New Horizons details
         if(villager.nh_details){

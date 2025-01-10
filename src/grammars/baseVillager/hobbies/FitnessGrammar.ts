@@ -4,7 +4,7 @@ import GrammarBuilder from "../../../classes/Builders/GrammarBuilder";
 
 let fitnessGrammar:GrammarBuilder = new GrammarBuilder({
     "topic": ["#exerciseTopic#"],
-    "exerciseTopic": ["[#describeExercise#]I'm thinking of doing some #exercise#. Its good for your #exerciseTarget.s#."],
+    "exerciseTopic": ["[#describeExercise#]I'm thinking of doing some #exercise#. It's good for your #exerciseTarget.s#."],
     "describeExercise": [
         new ExpansionRuleBuilder({
             exercise: "cardio",
