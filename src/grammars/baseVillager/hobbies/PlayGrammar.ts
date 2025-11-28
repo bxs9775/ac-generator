@@ -1,11 +1,11 @@
 import GrammarBuilder from "../../../classes/Builders/GrammarBuilder";
-import ExpansionRuleBuilder from "../../../classes/Builders/ExpansionRuleBuilder";
+import StringListRule from "../../../classes/Rules/StringListRule";
 
 let playGrammar: GrammarBuilder = new GrammarBuilder({
-    "topic": ["#playTopic#"],
-    "playTopic": ["Oh, I'm just running around, #player#.#playExtra#","I enjoy playing #lotOf.a# games.#playExtra#"],
-    "playExtra": [""," Would you like to join me?"],
-    "playGame": ["treasure hunt","hide and seek","tag"]
+    "topic": new StringListRule(["#playTopic#"]),
+    "playTopic": new StringListRule(["Oh, I'm just running around, #player#.#playExtra#","I enjoy playing #lotOf.a# games.#playExtra#"]),
+    "playExtra": new StringListRule([""," Would you like to join me?"]),
+    "playGame": new StringListRule(["treasure hunt","hide and seek","tag"])
 });
 
 export default playGrammar;

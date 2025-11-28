@@ -4,6 +4,7 @@ import GrammarBuilder from "../Builders/GrammarBuilder";
 import Grammar from "../Grammar";
 import GrammarSet from "../GrammarSet";
 import VillagerGrammarPackage from "../VillagerGrammarPackage";
+import StringListRule from "../Rules/StringListRule";
 
 /**
  * class for storing and managing villager details
@@ -61,9 +62,9 @@ export default class BaseVillager{
         var grammarPackage:VillagerGrammarPackage = GrammarPicker.selectGrammar(this.personality);
         
         var villagerGrammar = new GrammarBuilder({
-            name: [villager.name],
-            catchphrase: [villager.phrase],
-            month: [today.toLocaleString('default', { month: 'long' })]
+            'name': new StringListRule([villager.name]),
+            'catchphrase': new StringListRule([villager.phrase]),
+            'month': new StringListRule([today.toLocaleString('default', { month: 'long' })])
         })
         .addObject(grammarPackage.generalGrammar);
         

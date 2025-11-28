@@ -1,24 +1,26 @@
-import ExpansionRuleBuilder from "../../../classes/Builders/ExpansionRuleBuilder";
 import GrammarBuilder from "../../../classes/Builders/GrammarBuilder";
+import ExpansionListRule from "../../../classes/Rules/ExpansionListRule";
+import ExpansionRule from "../../../classes/Rules/ExpansionRule";
+import StringListRule from "../../../classes/Rules/StringListRule";
 
 
 let fitnessGrammar:GrammarBuilder = new GrammarBuilder({
-    "topic": ["#exerciseTopic#"],
-    "exerciseTopic": ["[#describeExercise#]I'm thinking of doing some #exercise#. It's good for your #exerciseTarget.s#."],
-    "describeExercise": [
-        new ExpansionRuleBuilder({
-            exercise: "cardio",
+    "topic": new StringListRule(["#exerciseTopic#"]),
+    "exerciseTopic": new StringListRule(["[#describeExercise#]I'm thinking of doing some #exercise#. It's good for your #exerciseTarget.s#."]),
+    "describeExercise": new ExpansionListRule([
+        new ExpansionRule({
+            exercise: ["cardio"],
             exerciseTarget: ["leg","calf","muscle"]
         }),
-        new ExpansionRuleBuilder({
+        new ExpansionRule({
             exercise: ["arm exercises","curls"],
             exerciseTarget: ["arm","bicep"]
         }),
-        new ExpansionRuleBuilder({
-            exercise: "pushups",
+        new ExpansionRule({
+            exercise: ["pushups"],
             exerciseTarget: ["tricep","pec","shoulder"]
         })
-    ]
+    ])
 });
 
 export default fitnessGrammar;

@@ -54,7 +54,7 @@ export default class GrammerFactory{
                 grammar.addRule("lotOf","lotsa","lotta")
                 grammar.addRule("treasure","[adj:,pirate ,buried ]#adj#treasure")
                 grammar.data["describeDigTreasure"].push(new ExpansionRuleBuilder({
-                    toolNoun: "#treasure#",
+                    toolNoun: ["#treasure#"],
                     toolVerb: ["dig up","hunt for"],
                     toolExtra: [""]
                 }));

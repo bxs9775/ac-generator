@@ -1,21 +1,20 @@
 import generalGrammar from '../baseVillager/GeneralGrammar';
-import ExpansionRuleBuilder from '../../classes/Builders/ExpansionRuleBuilder'
 import GrammarBuilder from '../../classes/Builders/GrammarBuilder';
-import GrammarSet from '../../classes/GrammarSet';
+import StringListRule from '../../classes/Rules/StringListRule';
 
 /**
  * Creates the base Tracery Grammar objects for all villagers
  * @returns  base GrammarBuilder object
  */
 let lazyGeneralGrammar:GrammarBuilder = new GrammarBuilder({
-    hello: ['hi'],
-    greeting: ['#greeting.toUpperCase#','#player.toUpperCase#!'],
-    howare: ['Wanna play?','Wanna play, #catch-phrase#?'],
-    player: ['#friend#','snack #friend#'],
-    friend: ['friend','friend','pal','buddy'],
-    lotOf:['lotsa','lotta'],
-    heldToolComment: ['That is a neet #tool#.'],
-    activityGuess: [' #toolVerb.capitalize.ing# #toolNoun.s#?',' What are ya doing? #toolVerb.ing.capitalize#?']
+    hello: new StringListRule(['hi']),
+    greeting: new StringListRule(['#greeting.toUpperCase#','#player.toUpperCase#!']),
+    howare: new StringListRule(['Wanna play?','Wanna play, #catchphrase#?']),
+    player: new StringListRule(['#friend#','snack #friend#']),
+    friend: new StringListRule(['friend','friend','pal','buddy']),
+    lotOf:new StringListRule(['lotsa','lotta']),
+    heldToolComment: new StringListRule(['That is a neat #tool#.']),
+    activityGuess: new StringListRule([' #toolVerb.capitalize.ing# #toolNoun.s#?',' What are ya doing? #toolVerb.ing.capitalize#?'])
 })
 
 // Add baseline general grammar rules.

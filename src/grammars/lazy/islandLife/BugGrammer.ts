@@ -1,10 +1,12 @@
 import bugGrammar from "../../baseVillager/islandLife/BugGrammer";
-import ExpansionRuleBuilder from "../../../classes/Builders/ExpansionRuleBuilder";
 import GrammarBuilder from "../../../classes/Builders/GrammarBuilder";
+import ExpansionRule from "../../../classes/Rules/ExpansionRule";
 
-let lazyBugGrammar:GrammarBuilder = new GrammarBuilder().addObject(bugGrammar);
+let lazyBugGrammar:GrammarBuilder = bugGrammar.copy();
 
-lazyBugGrammar.data["describeBugHunt"][0].addRule("toolVerb","make friends with");
-lazyBugGrammar.data["describeBugHunt"][0].addRule("toolNoun","bug #friend#");
+(lazyBugGrammar.data['describeBugHunt'] as ExpansionRule).updateRule({
+    toolVerb: ['make friends with'],
+    toolNoun: ['bug #friend#']
+});
 
 export default lazyBugGrammar;

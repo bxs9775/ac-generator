@@ -1,8 +1,9 @@
 import * as tracery from "tracery-grammar";
 import TraceryBuilder from "./TraceryBuilder";
-import ExpansionRuleBuilder from "./ExpansionRuleBuilder";
-import RuleDictionary from "./RuleDictionary";
 import Grammar from "../Grammar";
+import IRuleDictionary from "../../interfaces/IRuleDictionary";
+import IStringDictionary from "../../interfaces/IStringDictionary";
+import IRule from "../../interfaces/IRule";
 
 var customModifiers = require("../../helpers/customModifiers.js");
 
@@ -19,7 +20,7 @@ export default class GrammarBuilder extends TraceryBuilder{
      * Constructs a new GrammarBuilder
      * @param {RuleDictionary} startingObj A dictionary of grammar rules used to initialize the builder
      */
-    constructor(startingObj:RuleDictionary={}){
+    constructor(startingObj:IRuleDictionary={}){
         super(startingObj);
     }
 
@@ -28,22 +29,41 @@ export default class GrammarBuilder extends TraceryBuilder{
      * @returns a JSON object containing Tracery grammar.
      */
     build():Grammar{
-        var rules = Object.entries(this.data);
+        console.log("Building general grammer")
+        var rules:Array<[string,IRule]> = Object.entries(this.data);
+        console.log("Grammer rules", rules);
         var rawGrammar = rules.reduce<{[key:string]: Array<string>}>((result,[key,rule]) => {
-            if(Array.isArray(rule)){
-                if (rule.every((value: any) => typeof value === "string")){
-
-                    result[key] = rule;
-                } else if ((rule.every((value:any) => value instanceof ExpansionRuleBuilder))){
-                    result[key] = rule.map<string>(val => val.build());
-                }
-            }
+            result[key] = rule.build();
             return result;
-        },{})
+        },{});
+        console.log(rawGrammar);
         var grammar = tracery.createGrammar(rawGrammar);
         grammar.addModifiers(tracery.baseEngModifiers);
         grammar.addModifiers(customModifiers);
         return new Grammar(grammar);
+    }
+
+    copy(): GrammarBuilder {
+        var newBuilder = new GrammarBuilder();
+        var rules = Object.entries(this.data);
+        rules.forEach((ruleEntry) => {
+            let [key,rule] = ruleEntry;
+            switch(rule.ruleType){
+                case "ExpansionRule":
+                    newBuilder.addOrUpdateExpansionRule(key,rule.rawValue() as unknown as IStringDictionary);
+                    break;
+                case "ExpansionListRule":
+                    newBuilder.addOrUpdateExpansionListRule(key,rule.rawValue() as unknown as IStringDictionary[]);
+                    break;
+                case "StringListRule":
+                    let newArray:Array<string> = rule.rawValue() as unknown as Array<string>;
+                    newBuilder.addOrUpdateStringListRule(key,...newArray);
+                    break;
+                default:
+                    break;
+            }
+        });
+        return newBuilder;
     }
 }
 

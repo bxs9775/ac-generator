@@ -1,6 +1,6 @@
 import axios from "axios";
 import BaseVillager from "../classes/Villager/BaseVillager";
-import RuleDictionary from "../classes/Builders/RuleDictionary";
+import IRuleDictionary from "../interfaces/IRuleDictionary";
 
 /**
  * enum for indicating whether to look for the northern or southern hemisphere
@@ -89,7 +89,7 @@ class NookpediaHelper{
      * @param {Hemisphere} hemi which hemisphere do we want data for 
      * @returns a dictionary of grammar rules for fishing
      */
-    async getFish(month:number|string,hemi:Hemisphere=Hemisphere.north):Promise<RuleDictionary>{
+    async getFish(month:number|string,hemi:Hemisphere=Hemisphere.north):Promise<IRuleDictionary>{
         try{
             var acRes = await axios.get(`${this.url}/nh/fish`,{
                 params: {

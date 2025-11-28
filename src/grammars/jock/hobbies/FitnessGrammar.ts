@@ -1,12 +1,9 @@
 import fitnessGrammar from "../../baseVillager/hobbies/FitnessGrammar";
-import ExpansionRuleBuilder from "../../../classes/Builders/ExpansionRuleBuilder";
 import GrammarBuilder from "../../../classes/Builders/GrammarBuilder";
 
 
-let jockFitnessGrammar:GrammarBuilder = new GrammarBuilder({
-    "exerciseTopic": ["[#describeExercise#]I just finished my #exercise# regimen, #catch-phrase#. My #exerciseTarget.s# are going to be sore."],
-});
+let jockFitnessGrammar:GrammarBuilder = fitnessGrammar.copy();
 
-jockFitnessGrammar.addObject(fitnessGrammar);
+jockFitnessGrammar.addOrUpdateStringListRule("exerciseTopic","[#describeExercise#]I just finished my #exercise# regimen, #catchphrase#. My #exerciseTarget.s# are going to be sore.");
 
 export default jockFitnessGrammar;

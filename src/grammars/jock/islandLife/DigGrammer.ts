@@ -1,12 +1,21 @@
 import digGrammar from "../../baseVillager/islandLife/DigGrammer";
-import ExpansionRuleBuilder from "../../../classes/Builders/ExpansionRuleBuilder";
 import GrammarBuilder from "../../../classes/Builders/GrammarBuilder";
+import ExpansionListRule from "../../../classes/Rules/ExpansionListRule";
 
 
-let jockDigGrammar:GrammarBuilder = new GrammarBuilder().addObject(digGrammar);
+let jockDigGrammar:GrammarBuilder = digGrammar.copy();
 
-(jockDigGrammar.data["describeDigTreasure"] as Array<ExpansionRuleBuilder>).forEach(elem => elem.addRule("toolExtra"," That's a good idea for #digMuscle.a# workout."," You know #toolNoun# #toolVerb.ing# is good for developing your #digMuscle.s#?"," I should add that to my #digMuscle# regimen."));
-(jockDigGrammar.data["describeDigOther"] as Array<ExpansionRuleBuilder>).forEach(elem => elem.addRule("toolExtra"," That's a good idea for #digMuscle.a# workout."," You know #toolNoun# #toolVerb.ing# is good for developing your #digMuscle.s#?"," I should add that to my #digMuscle# regimen."));
-jockDigGrammar.addRule("digMuscle","glute", "hamstring", "quad", "ab", "shoulder");
+let toolExtraLines:string[] = [
+    " That's a good idea for #digMuscle.a# workout.",
+    " You know #toolNoun# #toolVerb.ing# is good for developing your #digMuscle.s#?",
+    " I should add that to my #digMuscle# regimen."
+];
+(jockDigGrammar.data["describeDigTreasure"] as ExpansionListRule).updateAllRules({
+    toolExtra: toolExtraLines
+});
+(jockDigGrammar.data["describeDigOther"] as ExpansionListRule).updateAllRules({
+    toolExtra: toolExtraLines
+});
+jockDigGrammar.addOrUpdateStringListRule("digMuscle","glute", "hamstring", "quad", "ab", "shoulder");
 
 export default jockDigGrammar;

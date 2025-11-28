@@ -1,32 +1,31 @@
-import ExpansionRuleBuilder from "../../classes/Builders/ExpansionRuleBuilder"
 import GrammarBuilder from "../../classes/Builders/GrammarBuilder";
-import GrammarSet from "../../classes/GrammarSet";
+import StringListRule from "../../classes/Rules/StringListRule";
 
 /**
  * Creates the base Tracery Grammar objects for all villagers
  * @returns  base GrammarBuilder object
  */
 export let generalGrammar:GrammarBuilder = new GrammarBuilder({
-    player: ["#playerName#"],
-    hello: ["hello"],
-    greeting: ["#hello.capitalize#, #player#.","#hello.capitalize#.","#hello.capitalize#, #catchphrase#."],
-    howare: ["How are you, #catchphrase#?"],
-    origin: ["#topic#","#greeting# #topic#","#greeting# #howare# #topic#"],
-    topic: [],
-    heldToolComment: [
+    player: new StringListRule(["#playerName#"]),
+    hello: new StringListRule(["hello"]),
+    greeting: new StringListRule(["#hello.capitalize#, #player#.","#hello.capitalize#.","#hello.capitalize#, #catchphrase#."]),
+    howare: new StringListRule(["How are you, #catchphrase#?"]),
+    origin: new StringListRule(["#topic#","#greeting# #topic#","#greeting# #howare# #topic#"]),
+    topic: new StringListRule([]),
+    heldToolComment: new StringListRule([
         "What is that #tool# for, #catchphrase#?#activityGuess#",
         "Are you #toolVerb.ing# #lotOf.a# #toolNoun.s# with that #tool#, #player#?"
-    ],
-    activityGuess: [
+    ]),
+    activityGuess: new StringListRule([
         "",
         " Are you #toolVerb.ing# #toolNoun.s#?"
-    ],
-    activityRecommenation: [
+    ]),
+    activityRecommenation: new StringListRule([
         "",
         " You can #toolVerb# them with a #toolGeneral#."
-    ],
-    baseToolAdj: ["flimsy ","","golden ","colorful ","outdoorsy "],
-    lotOf: ["lot of"]
+    ]),
+    baseToolAdj: new StringListRule(["flimsy ","","golden ","colorful ","outdoorsy "]),
+    lotOf: new StringListRule(["lot of"])
 });
 
 export default generalGrammar;

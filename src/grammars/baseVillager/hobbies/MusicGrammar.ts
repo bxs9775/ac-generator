@@ -1,65 +1,70 @@
 import GrammarBuilder from "../../../classes/Builders/GrammarBuilder";
-import ExpansionRuleBuilder from "../../../classes/Builders/ExpansionRuleBuilder";
+import StringListRule from "../../../classes/Rules/StringListRule";
+import ExpansionListRule from "../../../classes/Rules/ExpansionListRule";
+import ExpansionRule from "../../../classes/Rules/ExpansionRule";
 
 let musicGrammar:GrammarBuilder = new GrammarBuilder({
-    "topic": ["#musicTopic#"],
-    "musicTopic": ["[#describeMusic#]I like listening to #musicGenre# music. What about you, #player#?","[#describeMusic#]I'm really into #musicGenre# lately. My favorite song has to be #musicSong#."],
-    "describeMusic": [
-        new ExpansionRuleBuilder({
-            musicGenre: "pop",
+    "topic": new StringListRule(["#musicTopic#"]),
+    "musicTopic": new StringListRule([
+        "[#describeMusic#]I like listening to #musicGenre# music. What about you, #player#?",
+        "[#describeMusic#]I'm really into #musicGenre# lately. My favorite song has to be #musicSong#."
+    ]),
+    "describeMusic": new ExpansionListRule([
+        new ExpansionRule({
+            musicGenre: ["pop"],
             musicSong: ["K.K. Technopop","Only Me","K.K. Stroll","Bubblegum K.K."]
         }),
-        new ExpansionRuleBuilder({
-            musicGenre: "blues",
+        new ExpansionRule({
+            musicGenre: ["blues"],
             musicSong: ["K.K. Blues","K.K. Safari","K.K. Love Song"]
         }),
-        new ExpansionRuleBuilder({
-            musicGenre: "electronic",
+        new ExpansionRule({
+            musicGenre: ["electronic"],
             musicSong: ["K.K. Disco","K.K. Technopop","K.K. Fusion","K.K. D&B","My Place","K.K. House","K.K. Groove","K.K. Synth"]
         }),
-        new ExpansionRuleBuilder({
-            musicGenre: "jazz",
+        new ExpansionRule({
+            musicGenre: ["jazz"],
             musicSong: ["K.K. Swing","K.K. Jazz","K.K. Gumbo","K.K. Groove"]
         }),
-        new ExpansionRuleBuilder({
-            musicGenre: "rock",
+        new ExpansionRule({
+            musicGenre: ["rock"],
             musicSong: ["K.K. Rock","Rockin' K.K.","Surfin' K.K.","Two Days Ago","Steep Hill","K.K. Rockabilly","Stale Cupcakes",
             "Wandering","Space K.K."]
         }),
-        new ExpansionRuleBuilder({
-            musicGenre: "metal",
+        new ExpansionRule({
+            musicGenre: ["metal"],
             musicSong: ["K.K. Metal"]
         }),
-        new ExpansionRuleBuilder({
-            musicGenre: "classical",
+        new ExpansionRule({
+            musicGenre: ["classical"],
             musicSong: ["K.K. Waltz","K.K. Chorale","K.K. Étude","K.K. Aria","Café K.K.","K.K. Sonata"]
         }),
-        new ExpansionRuleBuilder({
-            musicGenre: "folk",
+        new ExpansionRule({
+            musicGenre: ["folk"],
             musicSong: ["K.K. Faire","Lucky K.K.","K.K. Condor","K.K. Steppe","Imperial K.K.","K.K. Folk","K.K. Dixie",
             "Neapolitan","Steep Hill","K.K. Rally","Spring Blossoms","K.K. Bazaar"]
         }),
-        new ExpansionRuleBuilder({
-            musicGenre: "country",
+        new ExpansionRule({
+            musicGenre: ["country"],
             musicSong: ["K.K. Country","K.K. Western"]
         }),
-        new ExpansionRuleBuilder({
-            musicGenre: "Brazilian",
+        new ExpansionRule({
+            musicGenre: ["Brazilian"],
             musicSong: ["K.K. Samba","K.K. Bossa"]
         }),
-        new ExpansionRuleBuilder({
-            musicGenre: "Latin",
+        new ExpansionRule({
+            musicGenre: ["Latin"],
             musicSong: ["K.K. Salsa","K.K. Mambo","K.K. Tango","K.K. Flamenco","K.K. Moody"]
         }),
-        new ExpansionRuleBuilder({
-            musicGenre: "Jamacian",
+        new ExpansionRule({
+            musicGenre: ["Jamacian"],
             musicSong: ["K.K. Reggae","To the Edge","K.K. Ska"]
         }),
-        new ExpansionRuleBuilder({
-            musicGenre: "ragtime",
+        new ExpansionRule({
+            musicGenre: ["ragtime"],
             musicSong: ["K.K. Ragtime"]
         })
-    ]
+    ])
 });
 
 export default musicGrammar;
