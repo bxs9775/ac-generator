@@ -1,8 +1,8 @@
 import fishGrammar from '../../baseVillager/islandLife/FishGrammer';
-import GrammarBuilder from '../../../classes/Builders/GrammarBuilder';
+import TraceryBuilder from '../../../classes/Builders/TraceryBuilder';
 import ExpansionRule from '../../../classes/Rules/ExpansionRule';
 
-let lazyFishGrammar:GrammarBuilder = fishGrammar.copy();
+let lazyFishGrammar:TraceryBuilder = fishGrammar.copy();
 
 (lazyFishGrammar.data['describeFishing'] as ExpansionRule).updateRule({
     toolVerb: ['nab'],

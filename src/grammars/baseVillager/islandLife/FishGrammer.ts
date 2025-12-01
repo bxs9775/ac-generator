@@ -1,9 +1,9 @@
-import GrammarBuilder from "../../../classes/Builders/GrammarBuilder";
+import TraceryBuilder from "../../../classes/Builders/TraceryBuilder";
 import ExpansionListRule from "../../../classes/Rules/ExpansionListRule";
 import ExpansionRule from "../../../classes/Rules/ExpansionRule";
 import StringListRule from "../../../classes/Rules/StringListRule";
 
-let fishGrammar:GrammarBuilder = new GrammarBuilder({
+let fishGrammar:TraceryBuilder = new TraceryBuilder({
     topic:new StringListRule(["#fishTopic#"]),
     fishTopic:new StringListRule([
         "[#describeFishing#][tool:#fishingrod#][toolGeneral:fishing rod]#heldToolComment##toolExtra#",

@@ -1,10 +1,10 @@
-import GrammarBuilder from "../../../classes/Builders/GrammarBuilder";
+import TraceryBuilder from "../../../classes/Builders/TraceryBuilder";
 import ExpansionListRule from "../../../classes/Rules/ExpansionListRule";
 import ExpansionRule from "../../../classes/Rules/ExpansionRule";
 import StringListRule from "../../../classes/Rules/StringListRule";
 
 
-let digGrammar:GrammarBuilder = new GrammarBuilder({
+let digGrammar:TraceryBuilder = new TraceryBuilder({
     topic: new StringListRule(["#digTopic#"]),
     // digging/fossil-hunting
     shovel: new StringListRule(["[adj:#baseToolAdj#,printed-design ]#adj#shovel"]),

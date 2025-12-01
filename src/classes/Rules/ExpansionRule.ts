@@ -42,12 +42,12 @@ export default class ExpansionRule implements IRule{
      * @returns a JSON object containing Tracery grammar.
      */
     build():Array<string>{
-        console.log(`Building Expansion Rule`);
+        //console.log(`Building Expansion Rule`);
         var rules = Object.entries(this.data);
-        console.log("Expansion rule entries",rules);
+        //console.log("Expansion rule entries",rules);
         let expansionRuleStr:string = rules.reduce((result,rule) => {
             var val = "";
-            console.log("Rule - ",rule);
+            //console.log("Rule - ",rule);
             let [key,values] = rule;
             if(typeof rule[1] === "string"){
                 val = rule[1];

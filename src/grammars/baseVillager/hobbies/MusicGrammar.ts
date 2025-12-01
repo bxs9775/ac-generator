@@ -1,9 +1,9 @@
-import GrammarBuilder from "../../../classes/Builders/GrammarBuilder";
+import TraceryBuilder from "../../../classes/Builders/TraceryBuilder";
 import StringListRule from "../../../classes/Rules/StringListRule";
 import ExpansionListRule from "../../../classes/Rules/ExpansionListRule";
 import ExpansionRule from "../../../classes/Rules/ExpansionRule";
 
-let musicGrammar:GrammarBuilder = new GrammarBuilder({
+let musicGrammar:TraceryBuilder = new TraceryBuilder({
     "topic": new StringListRule(["#musicTopic#"]),
     "musicTopic": new StringListRule([
         "[#describeMusic#]I like listening to #musicGenre# music. What about you, #player#?",

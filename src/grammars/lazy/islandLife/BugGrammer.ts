@@ -1,8 +1,8 @@
 import bugGrammar from "../../baseVillager/islandLife/BugGrammer";
-import GrammarBuilder from "../../../classes/Builders/GrammarBuilder";
+import TraceryBuilder from "../../../classes/Builders/TraceryBuilder";
 import ExpansionRule from "../../../classes/Rules/ExpansionRule";
 
-let lazyBugGrammar:GrammarBuilder = bugGrammar.copy();
+let lazyBugGrammar:TraceryBuilder = bugGrammar.copy();
 
 (lazyBugGrammar.data['describeBugHunt'] as ExpansionRule).updateRule({
     toolVerb: ['make friends with'],

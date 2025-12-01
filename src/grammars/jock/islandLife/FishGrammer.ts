@@ -1,8 +1,8 @@
 import fishGrammar from "../../baseVillager/islandLife/FishGrammer";
-import GrammarBuilder from "../../../classes/Builders/GrammarBuilder";
+import TraceryBuilder from "../../../classes/Builders/TraceryBuilder";
 import ExpansionRule from "../../../classes/Rules/ExpansionRule";
 
-let jockFishGrammar:GrammarBuilder = fishGrammar.copy();
+let jockFishGrammar:TraceryBuilder = fishGrammar.copy();
 
 (jockFishGrammar.data["describeFishing"] as ExpansionRule).updateRule({
     toolNoun: ['lurker'],

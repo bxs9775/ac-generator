@@ -1,9 +1,9 @@
-import GrammarBuilder from "../../../classes/Builders/GrammarBuilder";
+import TraceryBuilder from "../../../classes/Builders/TraceryBuilder";
 import ExpansionListRule from "../../../classes/Rules/ExpansionListRule";
 import ExpansionRule from "../../../classes/Rules/ExpansionRule";
 import StringListRule from "../../../classes/Rules/StringListRule";
 
-let educationGrammar:GrammarBuilder = new GrammarBuilder({
+let educationGrammar:TraceryBuilder = new TraceryBuilder({
     "topic": new StringListRule(["#educationTopic#"]),
     "educationTopic": new StringListRule([
         "[#describeEductation#]Have you found any #eduNoun.s# recently? If so, you should take them over to the museum.#museumExtra#.",

@@ -1,7 +1,7 @@
-import GrammarBuilder from "../../../classes/Builders/GrammarBuilder";
+import TraceryBuilder from "../../../classes/Builders/TraceryBuilder";
 import StringListRule from "../../../classes/Rules/StringListRule";
 
-let playGrammar: GrammarBuilder = new GrammarBuilder({
+let playGrammar: TraceryBuilder = new TraceryBuilder({
     "topic": new StringListRule(["#playTopic#"]),
     "playTopic": new StringListRule(["Oh, I'm just running around, #player#.#playExtra#","I enjoy playing #lotOf.a# games.#playExtra#"]),
     "playExtra": new StringListRule([""," Would you like to join me?"]),

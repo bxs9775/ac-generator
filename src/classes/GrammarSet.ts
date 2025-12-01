@@ -1,6 +1,6 @@
-import GrammarBuilder from "./Builders/GrammarBuilder";
+import TraceryBuilder from "./Builders/TraceryBuilder";
 
-export default class GrammarSet extends Map<string,GrammarBuilder>{
+export default class GrammarSet extends Map<string,TraceryBuilder>{
     /**
      * Combines 2 grammer sets into a new set
      * Based on Approach 1 in https://www.geeksforgeeks.org/javascript-program-to-combine-values-of-two-maps-having-same-key/
@@ -12,8 +12,8 @@ export default class GrammarSet extends Map<string,GrammarBuilder>{
         other.forEach((value,key) => {
             if(combinedSet.has(key)){
                 // if the set has this key combine grammers
-                let grammer = (new GrammarBuilder())
-                    .addObject(combinedSet.get(key) as GrammarBuilder)
+                let grammer = (new TraceryBuilder())
+                    .addObject(combinedSet.get(key) as TraceryBuilder)
                     .addObject(value)
                 combinedSet.set(key,grammer);
 

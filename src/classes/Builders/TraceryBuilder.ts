@@ -4,6 +4,10 @@ import ExpansionRule from "../Rules/ExpansionRule";
 import IStringDictionary from "../../interfaces/IStringDictionary";
 import StringListRule from "../Rules/StringListRule";
 import ExpansionListRule from "../Rules/ExpansionListRule";
+import Grammar from "../Grammar";
+import IRule from "../../interfaces/IRule";
+
+let customModifiers = require("../../helpers/customModifiers.js");
 
 /**
  * Base class for building a Tracery grammar object
@@ -45,7 +49,11 @@ export default class TraceryBuilder{
      * @returns 
      */
     addOrUpdateStringListRule(rule:string,...values:Array<string>):TraceryBuilder{
+        //console.log("Data",this.data);
+        //console.log("Rule",rule);
+        //console.log("Values",values);
         let valuesCopy:Array<string> = [...values];
+        //console.log("Values - copy",valuesCopy);
         if(!this.data[rule]){
             this.data[rule] = new StringListRule(valuesCopy);
         } else {
@@ -87,7 +95,7 @@ export default class TraceryBuilder{
                     this.addOrUpdateExpansionRule(key,rule.rawValue() as unknown as IStringDictionary);
                     break;
                 case "ExpansionListRule":
-                    this.addOrUpdateExpansionListRule(key,rule.rawValue() as unknown as IStringDictionary[])
+                    this.addOrUpdateExpansionListRule(key,rule.rawValue() as unknown as ExpansionRule[])
                 case "StringListRule":
                     this.addOrUpdateStringListRule(key,...(rule.rawValue() as unknown as Array<string>));
                     break;
@@ -97,6 +105,25 @@ export default class TraceryBuilder{
         });
         return this;
     }
+
+    /**
+         * Uses the builder to build a Trancery grammar JSON object
+         * @returns a JSON object containing Tracery grammar.
+         */
+        build():Grammar{
+            console.log("Building general grammer")
+            var rules:Array<[string,IRule]> = Object.entries(this.data);
+            console.log("Grammer rules", rules);
+            var rawGrammar = rules.reduce<{[key:string]: Array<string>}>((result,[key,rule]) => {
+                result[key] = rule.build();
+                return result;
+            },{});
+            console.log(rawGrammar);
+            var grammar = tracery.createGrammar(rawGrammar);
+            grammar.addModifiers(tracery.baseEngModifiers);
+            grammar.addModifiers(customModifiers);
+            return new Grammar(grammar);
+        }
 
     /**
      * Creates a copy of a TraceryBuilder

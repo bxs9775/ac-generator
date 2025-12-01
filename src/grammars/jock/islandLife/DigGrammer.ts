@@ -1,9 +1,9 @@
 import digGrammar from "../../baseVillager/islandLife/DigGrammer";
-import GrammarBuilder from "../../../classes/Builders/GrammarBuilder";
+import TraceryBuilder from "../../../classes/Builders/TraceryBuilder";
 import ExpansionListRule from "../../../classes/Rules/ExpansionListRule";
 
 
-let jockDigGrammar:GrammarBuilder = digGrammar.copy();
+let jockDigGrammar:TraceryBuilder = digGrammar.copy();
 
 let toolExtraLines:string[] = [
     " That's a good idea for #digMuscle.a# workout.",

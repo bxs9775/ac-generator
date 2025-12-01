@@ -1,12 +1,12 @@
 import generalGrammar from '../baseVillager/GeneralGrammar';
-import GrammarBuilder from '../../classes/Builders/GrammarBuilder';
+import TraceryBuilder from '../../classes/Builders/TraceryBuilder';
 import StringListRule from '../../classes/Rules/StringListRule';
 
 /**
  * Creates the base Tracery Grammar objects for all villagers
- * @returns  base GrammarBuilder object
+ * @returns  base TraceryBuilder object
  */
-let jockGeneralGrammar:GrammarBuilder = new GrammarBuilder({
+let jockGeneralGrammar:TraceryBuilder = new TraceryBuilder({
     hello: new StringListRule(['yo','hey','hey there','heya','lookin\' built','sup','heeeya']),
     greeting: new StringListRule(['Hey, hey!','Morniiiing!','Hey listen up!']),
     howare: new StringListRule(['How ya doin\',  #catchphrase#?', 'What\'s up?', 'Need something?', 'You bringin\' it?', 

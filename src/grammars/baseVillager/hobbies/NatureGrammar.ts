@@ -1,7 +1,7 @@
-import GrammarBuilder from "../../../classes/Builders/GrammarBuilder";
+import TraceryBuilder from "../../../classes/Builders/TraceryBuilder";
 import StringListRule from "../../../classes/Rules/StringListRule";
 
-let natureGrammar: GrammarBuilder = new GrammarBuilder({
+let natureGrammar: TraceryBuilder = new TraceryBuilder({
     "topic": new StringListRule(["#natureTopic#"]),
     "natureTopic": new StringListRule([
         "I love planting and tending to flowers. What about you, #player#? Do you like to garden?",

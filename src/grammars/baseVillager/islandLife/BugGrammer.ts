@@ -1,8 +1,8 @@
-import GrammarBuilder from "../../../classes/Builders/GrammarBuilder";
+import TraceryBuilder from "../../../classes/Builders/TraceryBuilder";
 import ExpansionRule from "../../../classes/Rules/ExpansionRule";
 import StringListRule from "../../../classes/Rules/StringListRule";
 
-let bugGrammar:GrammarBuilder = new GrammarBuilder({
+let bugGrammar:TraceryBuilder = new TraceryBuilder({
     topic: new StringListRule(["#bugTopic#"]),
     // bug catching
     net: new StringListRule(["[adj:#baseToolAdj#,star ]#adj#net"]),

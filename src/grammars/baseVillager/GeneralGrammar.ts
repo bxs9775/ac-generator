@@ -1,11 +1,11 @@
-import GrammarBuilder from "../../classes/Builders/GrammarBuilder";
+import TraceryBuilder from "../../classes/Builders/TraceryBuilder";
 import StringListRule from "../../classes/Rules/StringListRule";
 
 /**
  * Creates the base Tracery Grammar objects for all villagers
- * @returns  base GrammarBuilder object
+ * @returns  base TraceryBuilder object
  */
-export let generalGrammar:GrammarBuilder = new GrammarBuilder({
+export let generalGrammar:TraceryBuilder = new TraceryBuilder({
     player: new StringListRule(["#playerName#"]),
     hello: new StringListRule(["hello"]),
     greeting: new StringListRule(["#hello.capitalize#, #player#.","#hello.capitalize#.","#hello.capitalize#, #catchphrase#."]),

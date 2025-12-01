@@ -1,11 +1,11 @@
 import digGrammar from '../../baseVillager/islandLife/DigGrammer';
 import ExpansionRuleBuilder from '../../../classes/Builders/ExpansionRuleBuilder';
-import GrammarBuilder from '../../../classes/Builders/GrammarBuilder';
+import TraceryBuilder from '../../../classes/Builders/TraceryBuilder';
 import ExpansionListRule from '../../../classes/Rules/ExpansionListRule';
 import ExpansionRule from '../../../classes/Rules/ExpansionRule';
 
 
-let lazyDigGrammar:GrammarBuilder = digGrammar.copy();
+let lazyDigGrammar:TraceryBuilder = digGrammar.copy();
 
 // ???
 /*

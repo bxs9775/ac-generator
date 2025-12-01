@@ -1,8 +1,8 @@
 import fitnessGrammar from "../../baseVillager/hobbies/FitnessGrammar";
-import GrammarBuilder from "../../../classes/Builders/GrammarBuilder";
+import TraceryBuilder from "../../../classes/Builders/TraceryBuilder";
 
 
-let jockFitnessGrammar:GrammarBuilder = fitnessGrammar.copy();
+let jockFitnessGrammar:TraceryBuilder = fitnessGrammar.copy();
 
 jockFitnessGrammar.addOrUpdateStringListRule("exerciseTopic","[#describeExercise#]I just finished my #exercise# regimen, #catchphrase#. My #exerciseTarget.s# are going to be sore.");
 

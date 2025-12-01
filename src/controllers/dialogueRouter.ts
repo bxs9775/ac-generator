@@ -2,9 +2,10 @@ import express from "express";
 import BaseVillager from "../classes/Villager/BaseVillager";
 import BaseVillagerHelper from "../helpers/nookpediaHelper";
 import BaseVillagerResponse from "../classes/VillagerResponse";
-import GrammarBuilder from "../classes/Builders/GrammarBuilder";
+import TraceryBuilder from "../classes/Builders/TraceryBuilder";
 import ErrorResponse from "../classes/ErrorResponse";
 import TopicEnum from "../enums/TopicEnum";
+import StringListRule from "../classes/Rules/StringListRule";
 
 export const dialogueRouter = express.Router();
 
@@ -52,7 +53,11 @@ dialogueRouter.get('/dialogue',async (req,res) => {
   }
   console.log('Topic: ',topic.toString());
 
-  var builder = new GrammarBuilder({ playerName: [playerName], town: [town] });
+  //var builder = new TraceryBuilder({"playerName": [playerName], "town": [town] });
+  var builder = new TraceryBuilder({
+    "playerName": new StringListRule([playerName]),
+    "town": new StringListRule([town])
+  });
   var dialogue = villager.generateGrammar(builder,topic).generate();
   
   return res.status(200).json({
@@ -89,7 +94,11 @@ dialogueRouter.get('/rules', async (req,res) => {
   }
   console.log('Topic: ',topic.toString());
   
-  var builder = new GrammarBuilder({ playerName: [playerName], town: [town] });
+  //var builder = new TraceryBuilder({"playerName": [playerName], "town": [town] });
+  var builder = new TraceryBuilder({
+    "playerName": new StringListRule([playerName]),
+    "town": new StringListRule([town])
+  });
   var grammar = villager.generateGrammar(builder,topic);
 
   return res.status(200).json({

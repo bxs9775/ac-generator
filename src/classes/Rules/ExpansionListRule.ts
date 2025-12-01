@@ -27,9 +27,9 @@ export default class ExpansionListRule implements IRule{
     }
 
     updateRule(newValues:ExpansionRule[]):ExpansionListRule{
-        console.log("Updating ExpansionListRule");
-        console.log("Current data",this.data);
-        console.log("New data",newValues)
+        //console.log("Updating ExpansionListRule");
+        //console.log("Current data",this.data);
+        //console.log("New data",newValues)
         this.data = [...new Set([...this.data,...newValues.map((rule) => rule.copy())])];
         return this;
     }
@@ -46,11 +46,11 @@ export default class ExpansionListRule implements IRule{
      * @returns a JSON object containing Tracery grammar.
      */
     build():Array<string>{
-        console.log('ExpansionRuleSet data',this.data);
+        //console.log('ExpansionRuleSet data',this.data);
         let expansionRuleSet:string[] = this.data.map((rule) => {
             //console.log("rule",rule);
-            console.log("rule",rule);
-            console.log("rule",rule.build());
+            //console.log("rule",rule);
+            //console.log("rule",rule.build());
             return rule.build()[0];
         },"");
         return expansionRuleSet;

@@ -1,6 +1,6 @@
 import TopicEnum from "../../enums/TopicEnum";
 import GrammarPicker from "../GrammarPicker";
-import GrammarBuilder from "../Builders/GrammarBuilder";
+import TraceryBuilder from "../Builders/TraceryBuilder";
 import Grammar from "../Grammar";
 import GrammarSet from "../GrammarSet";
 import VillagerGrammarPackage from "../VillagerGrammarPackage";
@@ -61,7 +61,7 @@ export default class BaseVillager{
 
         var grammarPackage:VillagerGrammarPackage = GrammarPicker.selectGrammar(this.personality);
         
-        var villagerGrammar = new GrammarBuilder({
+        var villagerGrammar = new TraceryBuilder({
             'name': new StringListRule([villager.name]),
             'catchphrase': new StringListRule([villager.phrase]),
             'month': new StringListRule([today.toLocaleString('default', { month: 'long' })])
@@ -80,8 +80,8 @@ export default class BaseVillager{
             .addGrammarSet(grammarPackage.islandLifeGrammarSet);
         this.grammars.set('general',villagerGrammar);
 
-        let hobbyGrammar:GrammarBuilder = new GrammarBuilder();
-        let rawHobbyGrammar:GrammarBuilder|undefined = grammarPackage.hobbyGrammarSet.get(this.hobby.toLowerCase());
+        let hobbyGrammar:TraceryBuilder = new TraceryBuilder();
+        let rawHobbyGrammar:TraceryBuilder|undefined = grammarPackage.hobbyGrammarSet.get(this.hobby.toLowerCase());
         if(typeof rawHobbyGrammar !== "undefined"){
             hobbyGrammar.addObject(rawHobbyGrammar);
         }
@@ -89,13 +89,16 @@ export default class BaseVillager{
         this.grammars.set('hobby',hobbyGrammar);
     }
 
-    generateGrammar(baseGrammar:GrammarBuilder,topic:TopicEnum):Grammar{
-        console.log(topic);
+    generateGrammar(baseGrammar:TraceryBuilder,topic:TopicEnum):Grammar{
+        console.log("Topic",topic);
+        console.log("Base grammar",baseGrammar);
+        console.log("Base grammar copy",baseGrammar.copy());
         
-        let grammar = (new GrammarBuilder())
-            .addObject(baseGrammar)
-            .addObject(this.grammars.get('general') as GrammarBuilder);
-        let topicGrammar:GrammarBuilder|undefined = this.grammars.get(topic.toString().toLowerCase());
+        let grammar = baseGrammar.copy();
+        //console.log("Town/player grammar",grammar);
+        grammar.addObject(this.grammars.get('general') as TraceryBuilder);
+        //console.log("General grammar",grammar);
+        let topicGrammar:TraceryBuilder|undefined = this.grammars.get(topic.toString().toLowerCase());
         if(typeof topicGrammar !== "undefined"){
             grammar.addObject(topicGrammar);
         }
