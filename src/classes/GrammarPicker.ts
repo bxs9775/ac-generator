@@ -2,6 +2,7 @@ import VillagerGrammarPackage from './VillagerGrammarPackage';
 import baseVillagerPackage from '../grammars/baseVillager';
 import jockVillagerPackage from '../grammars/jock';
 import lazyVillagerPackage from '../grammars/lazy';
+import smugVillagerPackage from '../grammars/smug';
 
 export default class GrammarPicker{
     public static selectGrammar(personality:string):VillagerGrammarPackage{
@@ -12,6 +13,8 @@ export default class GrammarPicker{
             case 'lazy':
                 return lazyVillagerPackage;
                 break;
+            case 'smug':
+                return smugVillagerPackage;
             default:
                 return baseVillagerPackage;
                 break;

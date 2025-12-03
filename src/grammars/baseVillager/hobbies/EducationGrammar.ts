@@ -12,10 +12,10 @@ let educationGrammar:TraceryBuilder = new TraceryBuilder({
     ]),
     describeEducation: new ExpansionListRule([
         new ExpansionRule({
-            eduNoun: ["fossel"],
+            eduNoun: ["fossil"],
             museumExtra: [
                 "",
-                " Blathers gets really excited about fossels, but sometimes he talks too much. #catchphrase.capitalize#...",
+                " Blathers gets really excited about fossils, but sometimes he talks too much. #catchphrase.capitalize#...",
                 " Blathers is an expert on appraising fossils. It is so cool."
             ]
         }),

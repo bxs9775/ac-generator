@@ -113,7 +113,7 @@ export default class TraceryBuilder{
         build():Grammar{
             console.log("Building general grammer")
             var rules:Array<[string,IRule]> = Object.entries(this.data);
-            console.log("Grammer rules", rules);
+            //console.log("Grammer rules", rules);
             var rawGrammar = rules.reduce<{[key:string]: Array<string>}>((result,[key,rule]) => {
                 result[key] = rule.build();
                 return result;

@@ -12,7 +12,7 @@ let digGrammar:TraceryBuilder = new TraceryBuilder({
         "[#describeDigTreasure#][tool:#shovel#][toolGeneral:shovel]I hear there are #lotOf.a# #toolNoun.s# around #town#.#activityRecommenation#"]),
     describeDigTreasure: new ExpansionListRule([
         new ExpansionRule({
-            toolNoun: ["fossel"],
+            toolNoun: ["fossil"],
             toolVerb: ["dig up","hunt for"],
             toolExtra: [""]
         }),

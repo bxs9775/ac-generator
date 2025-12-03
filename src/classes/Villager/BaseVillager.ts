@@ -91,13 +91,9 @@ export default class BaseVillager{
 
     generateGrammar(baseGrammar:TraceryBuilder,topic:TopicEnum):Grammar{
         console.log("Topic",topic);
-        console.log("Base grammar",baseGrammar);
-        console.log("Base grammar copy",baseGrammar.copy());
         
         let grammar = baseGrammar.copy();
-        //console.log("Town/player grammar",grammar);
         grammar.addObject(this.grammars.get('general') as TraceryBuilder);
-        //console.log("General grammar",grammar);
         let topicGrammar:TraceryBuilder|undefined = this.grammars.get(topic.toString().toLowerCase());
         if(typeof topicGrammar !== "undefined"){
             grammar.addObject(topicGrammar);
