@@ -6,8 +6,8 @@ import StringListRule from "../../../classes/Rules/StringListRule";
 let educationGrammar:TraceryBuilder = new TraceryBuilder({
     "topic": new StringListRule(["#educationTopic#"]),
     "educationTopic": new StringListRule([
-        "[#describeEductation#]Have you found any #eduNoun.s# recently? If so, you should take them over to the museum.#museumExtra#.",
-        "[#describeEductation#]Whenever I'm curious about #eduNoun.s# I go talk to Blathers at the #town# museum.#museumExtra#",
+        "[#describeEducation#]Have you found any #eduNoun.s# recently? If so, you should take them over to the museum.#museumExtra#.",
+        "[#describeEducation#]Whenever I'm curious about #eduNoun.s# I go talk to Blathers at the #town# museum.#museumExtra#",
         "[#describeFish#]I've been learning about #fishLoc# fish recently. Do you want to hear some facts about #fishType#?"
     ]),
     describeEducation: new ExpansionListRule([
