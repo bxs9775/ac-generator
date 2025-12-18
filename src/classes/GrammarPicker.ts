@@ -6,6 +6,7 @@ import smugVillagerPackage from '../grammars/smug';
 import crankyVillagerPackage from '../grammars/cranky';
 import normalVillagerPackage from '../grammars/normal';
 import peppyVillagerPackage from '../grammars/peppy';
+import sisterlyVillagerPackage from '../grammars/sisterly';
 
 export default class GrammarPicker{
     public static selectGrammar(personality:string):VillagerGrammarPackage{
@@ -28,6 +29,8 @@ export default class GrammarPicker{
             case 'peppy':
                 return peppyVillagerPackage;
                 break;
+            case 'sisterly':
+                return sisterlyVillagerPackage;
             default:
                 return baseVillagerPackage;
                 break;
